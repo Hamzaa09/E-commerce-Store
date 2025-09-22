@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+  --color-Red: #c5172e;
+  --color-Gray: #696969;
+  --color-GrayLight: #69696945;
+  --color-WhiteLight: #F7F7F7;
+
+  --breakpoint-bigSm: 500px;
+}

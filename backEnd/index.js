@@ -53,5 +53,6 @@ app.use(errorMiddleWare);
 // });
 
 // for vercel
-
-export default app;
+export default (req, res) => {
+  return app(req, res);
+};

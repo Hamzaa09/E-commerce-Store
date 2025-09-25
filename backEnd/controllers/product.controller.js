@@ -1,6 +1,8 @@
 import { asyncHandler } from "../utilities/asyncHandler.utility.js";
 import { ProductModel } from "../models/products.model.js";
 import ErrorHandler from "../utilities/customError.utility.js";
+import { uploadToCloudinary } from "../utilities/cloudinary.utility.js";
+import { UploadStream } from "cloudinary";
 
 export const addProduct = asyncHandler(async (req, res, next) => {
   const {
@@ -12,9 +14,15 @@ export const addProduct = asyncHandler(async (req, res, next) => {
     productCategory,
     productDiscount,
   } = req.body;
-  const imageFiles = req.files.map(
-    (file) => process.env.IMAGE_URI + file.filename
+
+  let imageFiles = [];
+  const uploadResults = await Promise.all(
+    req.files.map((file) => uploadToCloudinary(file.path))
   );
+
+  imageFiles = uploadResults
+    .filter((result) => result !== null)
+    .map((result) => result.secure_url);
 
   let product = await ProductModel.findOne({ productName });
   if (product) {
@@ -369,9 +377,13 @@ export const updateProduct = asyncHandler(async (req, res, next) => {
 
   let imageFiles = [];
   if (req.files && req.files.length > 0) {
-    imageFiles = req.files.map(
-      (file) => process.env.IMAGE_URI + file.filename
+    const uploadResults = await Promise.all(
+      req.files.map((file) => uploadToCloudinary(file.path))
     );
+
+    imageFiles = uploadResults
+      .filter((result) => result !== null)
+      .map((result) => result.secure_url);
   }
 
   const data = {

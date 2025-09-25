@@ -1,5 +1,6 @@
 import { BlogModel } from "../models/blogs.model.js";
 import { asyncHandler } from "../utilities/asyncHandler.utility.js";
+import { uploadToCloudinary } from "../utilities/cloudinary.utility.js";
 import ErrorHandler from "../utilities/customError.utility.js";
 
 export const createBlog = asyncHandler(async (req, res, next) => {
@@ -13,7 +14,11 @@ export const createBlog = asyncHandler(async (req, res, next) => {
 
   const data = { blogTitle, blogContent };
   if (req.file) {
-    data.blogImage = process.env.IMAGE_URI + req.file.filename;
+    const uploadResult = await uploadToCloudinary(req.file.path);
+
+    if (uploadResult) {
+      data.blogImage = uploadResult.secure_url;
+    }
   }
 
   blog = await BlogModel.create(data);
@@ -46,7 +51,9 @@ export const updateBlog = asyncHandler(async (req, res, next) => {
 
   const data = { blogTitle, blogContent };
   if (req.file) {
-    data.blogImage = process.env.IMAGE_URI + req.file.filename;
+    const uploadResult = await uploadToCloudinary(req.file.path);
+
+    if (uploadResult) data.blogImage = uploadResult.secure_url;
   }
 
   const blog = await BlogModel.findByIdAndUpdate(_id, data, { new: true });

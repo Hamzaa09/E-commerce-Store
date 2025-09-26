@@ -2,7 +2,6 @@ import { asyncHandler } from "../utilities/asyncHandler.utility.js";
 import { ProductModel } from "../models/products.model.js";
 import ErrorHandler from "../utilities/customError.utility.js";
 import { uploadToCloudinary } from "../utilities/cloudinary.utility.js";
-import { UploadStream } from "cloudinary";
 
 export const addProduct = asyncHandler(async (req, res, next) => {
   const {

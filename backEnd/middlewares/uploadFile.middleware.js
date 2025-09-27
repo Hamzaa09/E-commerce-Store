@@ -11,13 +11,7 @@ if (!fs.existsSync(updateDir)) {
   fs.mkdirSync(updateDir, { recursive: true });
 }
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, updateDir),
-  filename: (req, file, cb) => {
-    const uniqueName = `${Date.now()}-${file.originalname}`;
-    cb(null, uniqueName);
-  },
-});
+const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb, next) => {
   const allowed = /jpeg|jpg|png|webp/;

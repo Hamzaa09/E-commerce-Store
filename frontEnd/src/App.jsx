@@ -27,7 +27,7 @@ import SneakersChild from "./Pages/Sneakers/SneakersChild";
 import BlogsManagement from "./Admin/BlogsManagement";
 import SuccessPage from "./Pages/SuccessPage";
 import CancelPage from "./Pages/CancelPage";
-import Policies from "./Pages/Footer/policies";
+import Policies from "./Pages/Footer/Policies";
 import { getAllOrdersCountThunk } from "../store/orders/order.thunk";
 import { getAllProductThunk } from "../store/products/product.thunk";
 

@@ -32,9 +32,7 @@ const SuccessPage = () => {
           });
         }
       });
-      orderId: sessionId, 
-
-      setOrders(newOrder);
+      orderId: sessionId, setOrders(newOrder);
     };
 
     fetchSession();

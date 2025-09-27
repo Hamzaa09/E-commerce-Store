@@ -1,5 +1,8 @@
 import cloudinaryPkg from "cloudinary";
 import fs from "fs";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const cloudinary = cloudinaryPkg.v2;
 
@@ -8,6 +11,8 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
+console.log("Cloudinary: ", process.env.CLOUDINARY_NAME);
 
 const uploadToCloudinary = async (localPath) => {
   try {

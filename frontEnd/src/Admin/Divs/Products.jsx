@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { FaStar } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct } from "../../../../backEnd/controllers/product.controller";
 import {
   deleteProductThunk,
   getProductForUpdateThunk,

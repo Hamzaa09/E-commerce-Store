@@ -6,11 +6,6 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const updateDir = path.join(process.cwd(), "uploads");
-if (!fs.existsSync(updateDir)) {
-  fs.mkdirSync(updateDir, { recursive: true });
-}
-
 const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb, next) => {

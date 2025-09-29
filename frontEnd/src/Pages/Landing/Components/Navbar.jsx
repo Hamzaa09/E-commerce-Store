@@ -287,7 +287,7 @@ const Navbar = (props) => {
           navShad ? "shadow-md" : "shadow-none"
         }`}
       >
-        <div className="logo flex justify-center items-center w-[13vw] 2xl:w-[8vw] py-6">
+        <div className="logo flex justify-center items-center w-[13vw] 2xl:w-[150px] py-6">
           <Link to="/">
             <img src="/Logo.jpg" alt="logo" />
           </Link>

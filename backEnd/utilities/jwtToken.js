@@ -15,8 +15,8 @@ export const generateToken = (res, user, statusCode) => {
       Date.now() + process.env.JWT_TOKEN_PERIOD_LIMIT * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
-    secure: false,
-    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV == "production" ? "none" : "lax",
   };
 
   res.status(statusCode).cookie("token", token, options).json({

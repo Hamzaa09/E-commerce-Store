@@ -17,10 +17,9 @@
     "@react-oauth/google": "^0.12.2",
     "@reduxjs/toolkit": "^2.8.2",
     "@stripe/stripe-js": "^7.8.0",
-    "@tailwindcss/vite": "^4.1.7",
     "apexcharts": "^5.3.1",
     "axios": "^1.11.0",
-    "daisyui": "^5.0.50",
+    "daisyui": "^5.1.27",
     "dotenv": "^17.2.1",
     "jquery": "^3.7.1",
     "owl.carousel": "^2.3.4",
@@ -34,12 +33,12 @@
     "react-icons": "^5.5.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.3",
-    "react-spinners": "^0.17.0",
-    "tailwindcss": "^4.1.7"
+    "react-spinners": "^0.17.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
     "@rollup/plugin-inject": "^5.0.5",
+    "@tailwindcss/vite": "^4.1.14",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",
@@ -47,6 +46,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
+    "tailwindcss": "^4.1.14",
     "vite": "^6.3.5"
   }
 }

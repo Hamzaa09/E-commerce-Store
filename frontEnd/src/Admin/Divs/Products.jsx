@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -7,9 +7,10 @@ import {
 } from "../../../store/products/product.thunk";
 import toast from "react-hot-toast";
 
-const Products = (props) => {
+const Products = ({ value }) => {
   const { completeProducts } = useSelector((state) => state.productSlice);
   const dispatch = useDispatch();
+  const [allProducts, setAllProducts] = useState();
 
   const handleDelete = async (id) => {
     const response = await dispatch(deleteProductThunk(id));
@@ -24,6 +25,20 @@ const Products = (props) => {
   const handleUpdate = async (id) => {
     const response = await dispatch(getProductForUpdateThunk(id));
   };
+
+  useEffect(() => {
+    if (value) {
+      setAllProducts(
+        completeProducts.filter(
+          (prod) =>
+            prod.productName?.toLowerCase().includes(value.toLowerCase()) ||
+            prod.productCategory?.toLowerCase().includes(value.toLowerCase())
+        )
+      );
+    } else {
+      setAllProducts(completeProducts);
+    }
+  }, [value, setAllProducts]);
 
   return (
     <>
@@ -49,7 +64,7 @@ const Products = (props) => {
             </thead>
 
             <tbody>
-              {completeProducts?.map((product, index) => (
+              {allProducts?.map((product, index) => (
                 <tr
                   key={index}
                   className="[&>td]:text-start [&>td]:text-base [&>td]:px-4 [&>td]:py-2 border border-transparent border-b-GrayLight border-t-GrayLight last:border-b-transparent hover:bg-WhiteLight hover:cursor-pointer"

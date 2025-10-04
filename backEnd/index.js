@@ -48,9 +48,9 @@ app.use("/orders", OrdersRoute);
 app.use(errorMiddleWare);
 
 // listen
-// app.listen(PORT, () => {
-//   console.log(`listening on http://localhost:${PORT}`);
-// });
+app.listen(PORT, () => {
+  console.log(`listening on http://localhost:${PORT}`);
+});
 
 // for vercel
 // for vercel

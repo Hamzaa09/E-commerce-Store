@@ -30,6 +30,14 @@ router.post(
   upload.array("productImages", 10),
   addProduct
 );
+router.patch(
+  "/updateProduct/:id",
+  authCheckMiddleware,
+  adminCheck,
+  upload.array("productImages", 10),
+  addProduct,
+  updateProduct
+);
 router.post("/getProducts", latestProducts);
 router.post("/popularProducts", popularProducts);
 router.post("/dealsProducts", dealsProducts);
@@ -44,6 +52,5 @@ router.post("/:category", getIndependentRoutes);
 router.get("/getAllProducts", getAllProducts);
 router.get("/getProductForUpdate", getProductForUpdate);
 router.delete("/deleteProduct/:id", deleteProduct);
-router.patch("/updateProduct/:id", updateProduct);
 
 export default router;

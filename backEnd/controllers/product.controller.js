@@ -3,6 +3,48 @@ import { ProductModel } from "../models/products.model.js";
 import ErrorHandler from "../utilities/customError.utility.js";
 import { uploadToCloudinary } from "../utilities/cloudinary.utility.js";
 
+// export const addProduct = asyncHandler(async (req, res, next) => {
+//   const {
+//     productName,
+//     productStock,
+//     productDescription,
+//     productPrice,
+//     productBrand,
+//     productCategory,
+//     productDiscount,
+//   } = req.body;
+
+//   let imageFiles = [];
+//   const uploadResults = await Promise.all(
+//     req.files.map((file) => uploadToCloudinary(file.buffer))
+//   );
+
+//   imageFiles = uploadResults
+//     .filter((result) => result !== null)
+//     .map((result) => result.secure_url);
+
+//   let product = await ProductModel.findOne({ productName });
+//   if (product) {
+//     return next(new ErrorHandler("Product Exists!", 409));
+//   }
+
+//   product = await ProductModel.create({
+//     productName,
+//     productStock,
+//     productDescription,
+//     productPrice,
+//     productBrand,
+//     productCategory,
+//     productDiscount,
+//     productImages: imageFiles,
+//   });
+
+//   res.status(201).json({
+//     success: true,
+//     response: { product },
+//   });
+// });
+
 export const addProduct = asyncHandler(async (req, res, next) => {
   const {
     productName,
@@ -14,21 +56,31 @@ export const addProduct = asyncHandler(async (req, res, next) => {
     productDiscount,
   } = req.body;
 
-  let imageFiles = [];
-  const uploadResults = await Promise.all(
-    req.files.map((file) => uploadToCloudinary(file.path))
-  );
-
-  imageFiles = uploadResults
-    .filter((result) => result !== null)
-    .map((result) => result.secure_url);
-
-  let product = await ProductModel.findOne({ productName });
-  if (product) {
-    return next(new ErrorHandler("Product Exists!", 409));
+  // ✅ Validate product name
+  if (!productName) {
+    return next(new ErrorHandler("Product name is required", 400));
   }
 
-  product = await ProductModel.create({
+  // ✅ Check if product already exists
+  let existing = await ProductModel.findOne({ productName });
+  if (existing) {
+    return next(new ErrorHandler("Product already exists!", 409));
+  }
+
+  // ✅ Handle image uploads (from memory buffer)
+  let imageFiles = [];
+  if (req.files && req.files.length > 0) {
+    const uploadResults = await Promise.all(
+      req.files.map((file) => uploadToCloudinary(file.buffer))
+    );
+
+    imageFiles = uploadResults
+      .filter((r) => r && r.secure_url)
+      .map((r) => r.secure_url);
+  }
+
+  // ✅ Create new product
+  const product = await ProductModel.create({
     productName,
     productStock,
     productDescription,
@@ -39,9 +91,11 @@ export const addProduct = asyncHandler(async (req, res, next) => {
     productImages: imageFiles,
   });
 
+  // ✅ Respond
   res.status(201).json({
     success: true,
-    response: { product },
+    message: "Product created successfully",
+    product,
   });
 });
 
@@ -374,18 +428,26 @@ export const updateProduct = asyncHandler(async (req, res, next) => {
     productDiscount,
   } = req.body;
 
+  // ✅ Check if product exists first
+  const existingProduct = await ProductModel.findById(id);
+  if (!existingProduct) {
+    return next(new ErrorHandler("Product not found!", 404));
+  }
+
+  // ✅ Upload new images if provided
   let imageFiles = [];
   if (req.files && req.files.length > 0) {
     const uploadResults = await Promise.all(
-      req.files.map((file) => uploadToCloudinary(file.path))
+      req.files.map((file) => uploadToCloudinary(file.buffer))
     );
 
     imageFiles = uploadResults
-      .filter((result) => result !== null)
-      .map((result) => result.secure_url);
+      .filter((r) => r && r.secure_url)
+      .map((r) => r.secure_url);
   }
 
-  const data = {
+  // ✅ Prepare update data
+  const updatedData = {
     productName,
     productStock,
     productDescription,
@@ -396,18 +458,16 @@ export const updateProduct = asyncHandler(async (req, res, next) => {
     ...(imageFiles.length > 0 && { productImages: imageFiles }),
   };
 
-  const product = await ProductModel.findByIdAndUpdate(id, data, {
+  // ✅ Update and return new version
+  const updatedProduct = await ProductModel.findByIdAndUpdate(id, updatedData, {
     new: true,
     runValidators: true,
   });
 
-  if (!product) {
-    return next(new ErrorHandler("Product not found!", 404));
-  }
-
   res.status(200).json({
     success: true,
-    product,
+    message: "Product updated successfully",
+    product: updatedProduct,
   });
 });
 

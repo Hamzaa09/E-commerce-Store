@@ -1,5 +1,4 @@
 import cloudinaryPkg from "cloudinary";
-import fs from "fs";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -12,24 +11,23 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-console.log("Cloudinary: ", process.env.CLOUDINARY_NAME);
+const uploadToCloudinary = (buffer) => {
+  return new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      { resource_type: "auto" },
+      (error, result) => {
+        if (error) {
+          console.error("Cloudinary upload error:", error);
+          reject(error);
+        } else {
+          resolve(result);
+        }
+      }
+    );
 
-const uploadToCloudinary = async (localPath) => {
-  try {
-    if (!localPath) return;
-
-    const result = await cloudinary.uploader.upload(localPath, {
-      resource_type: "auto",
-    });
-
-    fs.unlinkSync(localPath);
-
-    return result;
-  } catch (error) {
-    fs.unlinkSync(localPath);
-    console.log("Error: ", error);
-    return null;
-  }
+    // Write buffer into Cloudinary upload stream
+    stream.end(buffer);
+  });
 };
 
 export { uploadToCloudinary };

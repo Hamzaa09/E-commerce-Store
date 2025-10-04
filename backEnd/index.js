@@ -20,6 +20,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 
+// db connection
+connectDB();
+
 // middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -31,9 +34,6 @@ app.use(
 );
 app.use(cookieParser());
 app.use("/uploads", express.static("uploads"));
-
-// db connection
-connectDB();
 
 // routes
 app.use("/user", UserRoutes);
@@ -54,6 +54,4 @@ app.use(errorMiddleWare);
 
 // for vercel
 // for vercel
-export default function handler(req, res) {
-  return app(req, res);
-}
+export default app;

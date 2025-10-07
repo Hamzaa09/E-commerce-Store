@@ -92,8 +92,7 @@ export const userSlice = createSlice({
     builder.addCase(getAllUsersThunk.fulfilled, (state, action) => {
       state.allUsers = action.payload?.allUsers;
     });
-    builder.addCase(getAllUsersThunk.rejected, (state, action) => {
-    });
+    builder.addCase(getAllUsersThunk.rejected, (state, action) => {});
 
     // update
     builder.addCase(updateUserThunk.pending, (state, action) => {
@@ -151,20 +150,23 @@ export const userSlice = createSlice({
     });
 
     // add to cart
-    builder.addCase(addToCartThunk.pending, (state, action) => {
-    });
+    builder.addCase(addToCartThunk.pending, (state, action) => {});
     builder.addCase(addToCartThunk.fulfilled, (state, action) => {
       state.cartLength = action?.payload?.response?.cartLength;
     });
-    builder.addCase(addToCartThunk.rejected, (state, action) => {
-    });
+    builder.addCase(addToCartThunk.rejected, (state, action) => {});
 
     // get to cart
-    builder.addCase(getCartThunk.pending, (state, action) => {});
+    builder.addCase(getCartThunk.pending, (state, action) => {
+      state.screenLoading = true;
+    });
     builder.addCase(getCartThunk.fulfilled, (state, action) => {
       state.cart = action?.payload?.response?.cart;
+      state.screenLoading = true;
     });
-    builder.addCase(getCartThunk.rejected, (state, action) => {});
+    builder.addCase(getCartThunk.rejected, (state, action) => {
+      state.screenLoading = true;
+    });
   },
 });
 

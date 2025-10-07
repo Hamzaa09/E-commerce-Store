@@ -33,7 +33,7 @@ const SingleProductPage = () => {
   const [image, setImage] = useState();
   const [val, setVal] = useState();
   const [hover, setHover] = useState(null);
-  const { cart } = useSelector((state) => state.userSlice);
+  const { cart, userProfile } = useSelector((state) => state.userSlice);
 
   useEffect(() => {
     dispatch(getCartThunk());
@@ -84,6 +84,8 @@ const SingleProductPage = () => {
   }, [singleProd]);
 
   const handleClick = async (pid) => {
+    if (!userProfile) return toast.error("Login Required!");
+
     const response = await dispatch(addToCartThunk({ productId: pid }));
 
     if (response?.payload?.success) {
@@ -95,6 +97,7 @@ const SingleProductPage = () => {
   };
 
   const handleBuy = async () => {
+    if (!userProfile) return toast.error("Login Required!");
     const stripe = await loadStripe(
       import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
     );
@@ -122,7 +125,7 @@ const SingleProductPage = () => {
             <div className="md:sticky md:self-start md:top-0 md:w-1/2 flex flex-col justify-center items-center">
               <div className="w-[60%] md:w-full">
                 <img
-                  src={singleProd.productImages?.[0]}
+                  src={image}
                   alt=""
                   className="w-full h-full object-cover"
                 />
@@ -241,8 +244,20 @@ const SingleProductPage = () => {
                     Availability:
                   </p>
                   <div className="flex items-center text-lg font-medium text-black">
-                    <div className="p-[2px] rounded-full border-1 border-green-500 flex justify-center items-center mr-1">
-                      <div className="bg-green-500 h-2 w-2 rounded-full" />
+                    <div
+                      className={`${
+                        singleProd.productStock
+                          ? "border-green-500"
+                          : "border-red-500"
+                      } p-[2px] rounded-full border-1  flex justify-center items-center mr-1`}
+                    >
+                      <div
+                        className={` ${
+                          singleProd?.productStock
+                            ? "bg-green-500"
+                            : "bg-red-500"
+                        } h-2 w-2 rounded-full`}
+                      />
                     </div>
                     {`${singleProd?.productStock} in Stock`}
                   </div>

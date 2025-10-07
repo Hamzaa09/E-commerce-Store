@@ -6,16 +6,16 @@ const MainSlider = () => {
 
   const imgArr = [
     {
-      src: "/mainSlider/imageOne.png",
+      src: "/mainSlider/imageOne.jpg",
       h1: "VANS SPORTS RUNNING SHOES FOR MEN",
       p: "2025 LIMITED EDITION",
-      text_color: "text-white",
+      text_color: "text-black",
     },
     {
-      src: "/mainSlider/imageTwo.png",
+      src: "/mainSlider/imageTwo.jpg",
       h1: "GUCCI SPORTS RUNNING SHOES FOR MEN",
       p: "2025 LIMITED EDITION",
-      text_color: "text-black",
+      text_color: "text-white",
     },
   ];
 

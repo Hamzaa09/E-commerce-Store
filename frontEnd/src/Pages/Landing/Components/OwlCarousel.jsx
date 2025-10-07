@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "jquery";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import "owl.carousel";
 
 const OwlCarousel = () => {
+  const navigate = useNavigate();
   const imagesArray = [
     "Logo-1.png",
     "Logo-2.png",
@@ -49,7 +50,7 @@ const OwlCarousel = () => {
       },
     });
   }, []);
-   
+
   return (
     <>
       {/* carousel */}
@@ -82,7 +83,10 @@ const OwlCarousel = () => {
                 <h2 className="text-center font-bold text-lg md:text-2xl mb-1">
                   {promo.h2}
                 </h2>
-                <p className="font-semibold underline cursor-pointer text-center hover:no-underline ">
+                <p
+                  onClick={() => navigate("/shop")}
+                  className="font-semibold underline cursor-pointer text-center hover:no-underline "
+                >
                   {promo.p}
                 </p>
               </div>

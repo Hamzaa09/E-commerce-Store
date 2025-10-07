@@ -80,16 +80,13 @@ export const userSlice = createSlice({
 
     // get all users count
     builder.addCase(getAllUsersCountThunk.pending, (state, action) => {
-      state.screenLoading = true;
       state.userProfile = null;
     });
     builder.addCase(getAllUsersCountThunk.fulfilled, (state, action) => {
       state.allUsersCount = action.payload?.getAllUsersCount;
       state.nationalCustomers = action.payload?.nationalCustomers;
-      state.screenLoading = false;
     });
     builder.addCase(getAllUsersCountThunk.rejected, (state, action) => {
-      state.screenLoading = false;
     });
 
     // get all users
@@ -174,14 +171,11 @@ export const userSlice = createSlice({
 
     // get to cart
     builder.addCase(getCartThunk.pending, (state, action) => {
-      state.screenLoading = true;
     });
     builder.addCase(getCartThunk.fulfilled, (state, action) => {
       state.cart = action?.payload?.response?.cart;
-      state.screenLoading = false;
     });
     builder.addCase(getCartThunk.rejected, (state, action) => {
-      state.screenLoading = false;
     });
   },
 });

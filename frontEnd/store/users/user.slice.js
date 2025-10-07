@@ -64,16 +64,13 @@ export const userSlice = createSlice({
 
     // get user
     builder.addCase(getUserThunk.pending, (state, action) => {
-      state.screenLoading = true;
       state.userProfile = null;
     });
     builder.addCase(getUserThunk.fulfilled, (state, action) => {
       state.userProfile = action.payload?.User;
       state.authCheck = true;
-      state.screenLoading = false;
     });
     builder.addCase(getUserThunk.rejected, (state, action) => {
-      state.screenLoading = false;
       state.userProfile = null;
       state.authCheck = false;
     });
@@ -86,8 +83,7 @@ export const userSlice = createSlice({
       state.allUsersCount = action.payload?.getAllUsersCount;
       state.nationalCustomers = action.payload?.nationalCustomers;
     });
-    builder.addCase(getAllUsersCountThunk.rejected, (state, action) => {
-    });
+    builder.addCase(getAllUsersCountThunk.rejected, (state, action) => {});
 
     // get all users
     builder.addCase(getAllUsersThunk.pending, (state, action) => {
@@ -170,13 +166,11 @@ export const userSlice = createSlice({
     });
 
     // get to cart
-    builder.addCase(getCartThunk.pending, (state, action) => {
-    });
+    builder.addCase(getCartThunk.pending, (state, action) => {});
     builder.addCase(getCartThunk.fulfilled, (state, action) => {
       state.cart = action?.payload?.response?.cart;
     });
-    builder.addCase(getCartThunk.rejected, (state, action) => {
-    });
+    builder.addCase(getCartThunk.rejected, (state, action) => {});
   },
 });
 

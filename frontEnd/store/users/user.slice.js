@@ -158,14 +158,14 @@ export const userSlice = createSlice({
 
     // get to cart
     builder.addCase(getCartThunk.pending, (state, action) => {
-      state.screenLoading = true;
+      state.screenLoading = false;
     });
     builder.addCase(getCartThunk.fulfilled, (state, action) => {
       state.cart = action?.payload?.response?.cart;
-      state.screenLoading = true;
+      state.screenLoading = false;
     });
     builder.addCase(getCartThunk.rejected, (state, action) => {
-      state.screenLoading = true;
+      state.screenLoading = false;
     });
   },
 });

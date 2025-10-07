@@ -87,15 +87,12 @@ export const userSlice = createSlice({
 
     // get all users
     builder.addCase(getAllUsersThunk.pending, (state, action) => {
-      state.screenLoading = true;
       state.userProfile = null;
     });
     builder.addCase(getAllUsersThunk.fulfilled, (state, action) => {
       state.allUsers = action.payload?.allUsers;
-      state.screenLoading = false;
     });
     builder.addCase(getAllUsersThunk.rejected, (state, action) => {
-      state.screenLoading = false;
     });
 
     // update
@@ -155,14 +152,11 @@ export const userSlice = createSlice({
 
     // add to cart
     builder.addCase(addToCartThunk.pending, (state, action) => {
-      state.screenLoading = true;
     });
     builder.addCase(addToCartThunk.fulfilled, (state, action) => {
-      state.screenLoading = false;
       state.cartLength = action?.payload?.response?.cartLength;
     });
     builder.addCase(addToCartThunk.rejected, (state, action) => {
-      state.screenLoading = false;
     });
 
     // get to cart

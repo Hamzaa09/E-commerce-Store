@@ -59,8 +59,8 @@ const AdminNav = () => {
       >
         {/* close button  */}
         <div className="flex gap-2 items-center">
-          <div className="border border-GrayLight rounded-sm p-2 hover:cursor-pointer hover:bg-WhiteLight">
-            <HiBars3 onClick={() => setNav(!nav)} />
+          <div onClick={() => setNav(!nav)} className="border border-GrayLight rounded-sm p-2 hover:cursor-pointer hover:bg-WhiteLight">
+            <HiBars3 />
           </div>
           <div className="border border-GrayLight rounded-sm hover:cursor-pointer hover:bg-WhiteLight hidden md:flex items-center px-2">
             <CiSearch className="text-2xl" />

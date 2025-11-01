@@ -67,9 +67,9 @@ const Products = ({ value }) => {
               {allProducts?.map((product, index) => (
                 <tr
                   key={index}
-                  className="[&>td]:text-start [&>td]:text-base [&>td]:px-4 [&>td]:py-2 border border-transparent border-b-GrayLight border-t-GrayLight last:border-b-transparent hover:bg-WhiteLight hover:cursor-pointer"
+                  className="[&>td]:text-start [&>td]:text-base [&>td]:px-4 [&>td]:mx-4 [&>td]:py-2 border border-transparent border-b-GrayLight border-t-GrayLight last:border-b-transparent hover:bg-WhiteLight hover:cursor-pointer"
                 >
-                  <td>{index + 1}</td>
+                  <td className="pl-4">{index + 1}</td>
                   <td className="flex justify-start items-center gap-3">
                     <img
                       className="w-12 h-12 rounded-full"

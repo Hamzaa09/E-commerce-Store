@@ -324,7 +324,7 @@ const SingleProductPage = () => {
               </div>
 
               {/* div 4 */}
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-1 mr-5 md:mr-0">
                 {/* description  */}
                 <div className="flex flex-col gap-3 tracking-wide">
                   <div

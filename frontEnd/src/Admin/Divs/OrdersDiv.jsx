@@ -79,9 +79,9 @@ const OrdersDiv = ({ value }) => {
                 products?.map((product, j) => (
                   <tr
                     key={j}
-                    className="[&>td]:text-start [&>td]:text-base [&>td]:px-4 [&>td]:py-2 border border-transparent border-b-GrayLight border-t-GrayLight last:border-b-transparent hover:bg-WhiteLight hover:cursor-pointer"
+                    className="[&>td]:text-start [&>td]:text-base [&>td]:mx-4 [&>td]:py-2 border border-transparent border-b-GrayLight border-t-GrayLight last:border-b-transparent hover:bg-WhiteLight hover:cursor-pointer"
                   >
-                    <td>{j + 1}</td>
+                    <td className="pl-4">{j + 1}</td>
                     <td className="flex justify-start items-center gap-3">
                       <img
                         className="w-12 h-12 rounded-full"
@@ -91,9 +91,9 @@ const OrdersDiv = ({ value }) => {
                       <p>{product.productName}</p>
                     </td>
                     <td>{allOrdersDataAdmin?.[i]?.email}</td>
-                    <td>{product.productCategory}</td>
-                    <td>{product.productPrice}</td>
-                    <td>{product.productStock}</td>
+                    <td className="pl-4">{product.productCategory}</td>
+                    <td className="pl-7">{product.productPrice}</td>
+                    <td className="pl-4">{product.productStock}</td>
                     <td>
                       <Select
                         size="small"

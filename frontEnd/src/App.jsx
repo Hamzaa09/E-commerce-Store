@@ -20,7 +20,6 @@ import ContentManagementPage from "./Admin/ContentManagementPage";
 import ProtectedRoute from "../utilities/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
-import { getAllUsersCountThunk, getUserThunk } from "../store/users/user.thunk";
 import { useDispatch, useSelector } from "react-redux";
 import ShopChilds from "./Pages/Shop/ShopChilds";
 import SneakersChild from "./Pages/Sneakers/SneakersChild";
@@ -28,17 +27,19 @@ import BlogsManagement from "./Admin/BlogsManagement";
 import SuccessPage from "./Pages/SuccessPage";
 import CancelPage from "./Pages/CancelPage";
 import Policies from "./Pages/Footer/Policies";
+import { getAllUsersCountThunk, getUserThunk } from "../store/users/user.thunk";
 import { getAllOrdersCountThunk } from "../store/orders/order.thunk";
 import { getAllProductThunk } from "../store/products/product.thunk";
 
 function App() {
   const dispatch = useDispatch();
+  const { userProfile } = useSelector((state) => state.userSlice);
 
   useEffect(() => {
     dispatch(getUserThunk());
-    dispatch(getAllUsersCountThunk());
-    dispatch(getAllOrdersCountThunk());
-    dispatch(getAllProductThunk());
+    // dispatch(getAllUsersCountThunk());
+    // dispatch(getAllOrdersCountThunk());
+    // dispatch(getAllProductThunk());
   }, [dispatch]);
 
   return (

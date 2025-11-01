@@ -9,10 +9,8 @@ export const adminCheck = asyncHandler(async (req, res, next) => {
 
   if (!user) return next(new ErrorHandler("User not found!", 404));
 
-  if (user.role) {
-    if (user.role !== "admin") {
-      return next(new ErrorHandler("Not an Admin!", 403));
-    }
+  if (user.role && user.role !== "admin") {
+    return next(new ErrorHandler("Not an Admin!", 403));
   }
 
   req.user = user;

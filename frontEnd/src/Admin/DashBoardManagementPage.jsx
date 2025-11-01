@@ -12,11 +12,21 @@ import { Link } from "react-router-dom";
 import PageChunk from "./Divs/PageChunk";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { getAllUsersCountThunk } from "../../store/users/user.thunk";
+import { getAllOrdersCountThunk } from "../../store/orders/order.thunk";
+import { getAllProductThunk } from "../../store/products/product.thunk";
+
 
 const DashBoardManagementPage = () => {
   const dispatch = useDispatch();
   const { allUsersCount } = useSelector((state) => state.userSlice);
   const { allOrdersCount } = useSelector((state) => state.orderSlice);
+
+  useEffect(() => {
+    dispatch(getAllUsersCountThunk());
+    dispatch(getAllOrdersCountThunk());
+    dispatch(getAllProductThunk());
+  }, []);
 
   return (
     <div className="flex w-full">
@@ -71,7 +81,9 @@ const DashBoardManagementPage = () => {
                   <h6 className="text-base lg:text-lg font-medium text-Gray">
                     Orders
                   </h6>
-                  <h2 className="text-3xl lg:text-4xl font-bold">{allOrdersCount}</h2>
+                  <h2 className="text-3xl lg:text-4xl font-bold">
+                    {allOrdersCount}
+                  </h2>
                 </div>
               </div>
 

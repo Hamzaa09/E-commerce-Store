@@ -18,6 +18,7 @@ import OrdersManagementPage from "./Admin/OrdersManagementPage";
 import InquiriesManagementPage from "./Admin/InquiriesManagementPage";
 import ContentManagementPage from "./Admin/ContentManagementPage";
 import ProtectedRoute from "../utilities/ProtectedRoute";
+import AdminProtectedRoute from "../utilities/AdminProtectedRoute";
 import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,9 +28,7 @@ import BlogsManagement from "./Admin/BlogsManagement";
 import SuccessPage from "./Pages/SuccessPage";
 import CancelPage from "./Pages/CancelPage";
 import Policies from "./Pages/Footer/Policies";
-import { getAllUsersCountThunk, getUserThunk } from "../store/users/user.thunk";
-import { getAllOrdersCountThunk } from "../store/orders/order.thunk";
-import { getAllProductThunk } from "../store/products/product.thunk";
+import { getUserThunk } from "../store/users/user.thunk";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,9 +36,6 @@ function App() {
 
   useEffect(() => {
     dispatch(getUserThunk());
-    // dispatch(getAllUsersCountThunk());
-    // dispatch(getAllOrdersCountThunk());
-    // dispatch(getAllProductThunk());
   }, [dispatch]);
 
   return (
@@ -77,7 +73,7 @@ function App() {
           <Route path="*" element={<NoPage />}></Route>
 
           {/* Admin Routes  */}
-          <Route path="/admin">
+          <Route path="/admin" element={<AdminProtectedRoute role={userProfile?.role}/>}>
             <Route
               path="dashboard"
               element={<DashBoardManagementPage />}

@@ -71,7 +71,9 @@ const CartPage = () => {
       import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
     );
 
-    const response = await dispatch(getPaymentThunk({ orders: cartProducts, quantity: value }));
+    const response = await dispatch(
+      getPaymentThunk({ orders: cartProducts, quantity: value })
+    );
 
     const result = stripe.redirectToCheckout({
       sessionId: response.payload.id,
@@ -224,16 +226,18 @@ const CartPage = () => {
             className={`text-center md:text-end font-semibold tracking-wide text-xl w-full`}
           >
             Subtotal $
-            {cartProducts.reduce((sum, product) => {
-              let price = product.productDiscount
-                ? (Number(product.productPrice) -
-                    (Number(product.productPrice) * product.productDiscount) /
-                      100) *
-                  value[product._id]
-                : product.productPrice * value[product._id];
+            {Number(
+              cartProducts.reduce((sum, product) => {
+                let price = product.productDiscount
+                  ? (Number(product.productPrice) -
+                      (Number(product.productPrice) * product.productDiscount) /
+                        100) *
+                    value[product._id]
+                  : product.productPrice * value[product._id];
 
-              return (sum += price);
-            }, 0)}
+                return (sum += price);
+              }, 0)
+            ).toFixed(2)}
           </h1>
 
           <div className="w-full text-center group hover:cursor-pointer text-Gray text-sm sm:text-base mt-1 flex justify-center md:justify-end items-center gap-2">

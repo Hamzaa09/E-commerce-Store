@@ -6,7 +6,6 @@ import ErrorHandler from "../utilities/customError.utility.js";
 export const createBlog = asyncHandler(async (req, res, next) => {
   const { blogTitle, blogContent } = req.body;
 
-  // ✅ Check for existing blog
   let existingBlog = await BlogModel.findOne({ blogTitle });
   if (existingBlog) {
     return next(new ErrorHandler("Blog already exists!", 405));
@@ -14,7 +13,6 @@ export const createBlog = asyncHandler(async (req, res, next) => {
 
   const data = { blogTitle, blogContent };
 
-  // ✅ Handle image upload if provided
   if (req.file && req.file.buffer) {
     const uploadResult = await uploadToCloudinary(req.file.buffer);
     if (uploadResult && uploadResult.secure_url) {
@@ -22,7 +20,6 @@ export const createBlog = asyncHandler(async (req, res, next) => {
     }
   }
 
-  // ✅ Create new blog
   const blog = await BlogModel.create(data);
   if (!blog) {
     return next(new ErrorHandler("Database Error!", 400));
@@ -40,7 +37,6 @@ export const updateBlog = asyncHandler(async (req, res, next) => {
 
   const data = { blogTitle, blogContent };
 
-  // ✅ Upload new image if provided
   if (req.file && req.file.buffer) {
     const uploadResult = await uploadToCloudinary(req.file.buffer);
     if (uploadResult && uploadResult.secure_url) {

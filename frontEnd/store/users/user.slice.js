@@ -64,13 +64,16 @@ export const userSlice = createSlice({
 
     // get user
     builder.addCase(getUserThunk.pending, (state, action) => {
+      state.screenLoading = true;
       state.userProfile = null;
     });
     builder.addCase(getUserThunk.fulfilled, (state, action) => {
+      state.screenLoading = false;
       state.userProfile = action.payload?.User;
       state.authCheck = true;
     });
     builder.addCase(getUserThunk.rejected, (state, action) => {
+      state.screenLoading = false;
       state.userProfile = null;
       state.authCheck = false;
     });

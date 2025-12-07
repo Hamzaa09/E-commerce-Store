@@ -8,7 +8,11 @@ import { MdEdit } from "react-icons/md";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUserThunk, updateUserThunk } from "../../store/users/user.thunk";
+import {
+  getUserThunk,
+  logoutUserThunk,
+  updateUserThunk,
+} from "../../store/users/user.thunk";
 import toast from "react-hot-toast";
 import BreadCrum from "../Pages/Landing/Components/BreadCrum";
 import { getAllOrdersThunk } from "../../store/orders/order.thunk";
@@ -29,11 +33,12 @@ const User = () => {
   } = useForm();
 
   useEffect(() => {
+    dispatch(getUserThunk());
     dispatch(getAllOrdersThunk());
   }, []);
 
   useEffect(() => {
-  }, [allOrders]);
+  }, [allOrders, userProfile]);
 
   useEffect(() => {
     if (userProfile) {

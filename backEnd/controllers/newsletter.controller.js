@@ -2,8 +2,8 @@
 import { NewsletterModel } from "../models/newsletter.model.js";
 import { asyncHandler } from "../utilities/asyncHandler.utility.js";
 import { sendEmail } from "../utilities/newsletter.utility.js";
+ 
 
-// ✅ Subscribe
 export const subscribe = asyncHandler(async (req, res) => {
   const { email } = req.body;
 

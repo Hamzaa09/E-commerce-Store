@@ -84,7 +84,7 @@ const ShopChilds = () => {
       <div className="relative w-full">
         <ScrollToTopButton />
         <TagLine />
-        <Navbar />
+        <Navbar value="shop"/>
 
         <div
           className={`relative w-full ${!filter ? "overflow-x-hidden" : ""}`}

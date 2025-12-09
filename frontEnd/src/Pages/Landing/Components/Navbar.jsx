@@ -124,11 +124,24 @@ const Navbar = (props) => {
                 onClick={() => setShop(!shop)}
                 className="flex justify-between w-full h-fit"
               >
-                <Link to="/shop">Shop</Link>
+                <Link
+                  to="/shop"
+                  className={`${props.value === "shop" ? "text-Red" : ""}`}
+                >
+                  Shop
+                </Link>
                 {shop ? (
-                  <RiArrowDropUpLine className="mt-1 text-2xl" />
+                  <RiArrowDropUpLine
+                    className={`${
+                      props.value === "shop" ? "text-Red" : ""
+                    } mt-1 text-xl`}
+                  />
                 ) : (
-                  <RiArrowDropDownLine className="mt-1 text-2xl" />
+                  <RiArrowDropDownLine
+                    className={`${
+                      props.value === "shop" ? "text-Red" : ""
+                    } mt-1 text-xl`}
+                  />
                 )}
               </div>
 
@@ -217,11 +230,24 @@ const Navbar = (props) => {
                 onClick={() => setSneakers(!sneakers)}
                 className="flex justify-between w-full h-fit"
               >
-                <Link to="/sneakers">Sneakers</Link>
+                <Link
+                  to="/sneakers"
+                  className={`${props.value === "sneakers" ? "text-Red" : ""}`}
+                >
+                  Sneakers
+                </Link>
                 {sneakers ? (
-                  <RiArrowDropUpLine className="mt-1 text-2xl" />
+                  <RiArrowDropUpLine
+                    className={`${
+                      props.value === "sneakers" ? "text-Red" : ""
+                    } mt-1 text-xl`}
+                  />
                 ) : (
-                  <RiArrowDropDownLine className="mt-1 text-2xl" />
+                  <RiArrowDropDownLine
+                    className={`${
+                      props.value === "sneakers" ? "text-Red" : ""
+                    } mt-1 text-xl`}
+                  />
                 )}
               </div>
 
@@ -301,8 +327,17 @@ const Navbar = (props) => {
             Home
           </Link>
           <div className="flex justify-center items-center relative group">
-            <Link to="/shop">Shop</Link>
-            <RiArrowDropDownLine className="mt-1 text-xl" />
+            <Link
+              to="/shop"
+              className={`${props.value === "shop" ? "text-Red" : ""}`}
+            >
+              Shop
+            </Link>
+            <RiArrowDropDownLine
+              className={`${
+                props.value === "shop" ? "text-Red" : ""
+              } mt-1 text-xl`}
+            />
 
             {/* Dropdown */}
             <div className="absolute top-full left-0 lg:w-[35vw] xl:w-[25vw] opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 ease-in-out z-[1000] flex items-end">
@@ -359,8 +394,17 @@ const Navbar = (props) => {
             Collections
           </Link>
           <div className="flex justify-center items-center relative group">
-            <Link to="/sneakers">Sneakers</Link>
-            <RiArrowDropDownLine className="mt-1 text-xl" />
+            <Link
+              to="/sneakers"
+              className={`${props.value === "sneakers" ? "text-Red" : ""}`}
+            >
+              Sneakers
+            </Link>
+            <RiArrowDropDownLine
+              className={`${
+                props.value === "sneakers" ? "text-Red" : ""
+              } mt-1 text-xl`}
+            />
             <div className="opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto absolute top-full left-0 lg:w-[20vw] xl:w-[16vw] transition-all duration-200 ease-in-out z-[1000]">
               <ul className="flex flex-col gap-3 text-lg bg-white z-100 w-full px-5 py-5 [&>*]:hover:cursor-pointer [&>*]:transition-all [&>*]:duration-100 [&>*]:ease-in-out [&>*]:font-normal shadow-sm rounded-sm mt-8">
                 {prodBrands &&

@@ -6,7 +6,7 @@ const BreadCrum = ({ value }) => {
   const name = window.location.pathname.split("/")[1].toUpperCase();
 
   useEffect(() => {
-    window.scrollTo({ top, behavior: "smooth" });
+window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   return (

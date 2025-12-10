@@ -49,8 +49,10 @@ const ProductsSection = () => {
     }
   }, [halfAllProducts]);
 
+  useEffect(() => {}, [halfAllProducts]);
+
   const handleClick = () => {
-    window.scrollTo({ top, behavior: "smooth" });
+window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -77,7 +79,7 @@ const ProductsSection = () => {
             className="item h-fit w-[100%] flex flex-col gap-1 justify-around"
           >
             <div
-              className={`relative group h-[40%] lg:h-[75%] mb-2 flex justify-center items-center transition-all duration-300 ease-in-out`}
+              className={`relative group h-[40%] lg:h-[75%] mb-2 flex justify-center items-center transition-all duration-300 ease-in-out overflow-visible`}
             >
               {/* Normal Image */}
               <img
@@ -97,7 +99,7 @@ const ProductsSection = () => {
                 <div
                   className={`imageIcons absolute top-0 left-0 w-15 h-15 flex justify-center items-center text-[5vh] md:text-[5.5vh] mb-2 transition duration-300 ease-in-out drop-shadow-md`}
                 >
-                  <img src="buttons/out-of-stock.png" alt="" />
+                  <img src="/buttons/out-of-stock.png" alt="" />
                 </div>
               ) : (
                 <></>
@@ -107,8 +109,6 @@ const ProductsSection = () => {
                   -{product.productDiscount}%
                 </span>
               )}
-
-              
             </div>
 
             <p className="text-center font-medium text-Gray text-md lg:text-lg">

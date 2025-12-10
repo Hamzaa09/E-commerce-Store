@@ -11,7 +11,7 @@ const Policies = () => {
   const { policies } = useParams();
 
   useEffect(() => {
-    window.scrollTo({ top, behavior: "smooth" });
+window.scrollTo({ top: 0, behavior: "smooth" });
   }, [policies]);
   return (
     <>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaFacebookF } from "react-icons/fa";
+import { FaFacebookF, FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
@@ -30,9 +30,7 @@ const Footer = () => {
               nationwide delivery, and a passion for quality that speaks for
               itself. We accept:
             </p>
-            <div
-              className="credit-cards mt-5 text-center width-full flex gap-5"
-            >
+            <div className="credit-cards mt-5 text-center width-full flex gap-5">
               <img
                 height="3 We accept: 0"
                 src="https://shoplineimg.com/assets/footer/card_visa.png"
@@ -126,29 +124,35 @@ const Footer = () => {
                 </p>
                 <Link to={"/"} className="flex items-center gap-2">
                   <IoMailOutline className="text-[#c5172e] text-2xl" />
-                  hamza-dev@gmail.com
+                  hamza036513@gmail.com
                 </Link>
                 <Link to={"/"} className="flex items-center gap-2">
                   <IoCallOutline className="text-[#c5172e] text-2xl" />
-                  03485379552
+                  0348-5379552
                 </Link>
               </ul>
             )}
           </div>
 
           <div className="flex items-center justify-center gap-3 mt-5 mb-3 [&>a]:bg-[#eeeeee] [&>a]:p-3 [&>a]:rounded-full [&>a]:hover:bg-[#c5172e] [&>a]:hover:text-white [&>a]:transition [&>a]:duration-300 [&>a]:ease-in-out">
-            <Link to={"/"}>
+            <a
+              target="_blank"
+              href="https://www.facebook.com/profile.php?id=100028870688884"
+            >
               <FaFacebookF />
-            </Link>
-            <Link to={"/"}>
+            </a>
+            <a target="_blank" href="https://www.instagram.com/m.hamza_101/">
               <FaInstagram />
-            </Link>
-            <Link to={"/"}>
-              <FaWhatsapp />
-            </Link>
-            <Link to={"/"}>
-              <BsTwitterX />
-            </Link>
+            </a>
+            <a target="_blank" href="https://github.com/Hamzaa09/">
+              <FaGithub />
+            </a>
+            <a
+              target="_blank"
+              href="https://www.linkedin.com/in/muhammad-hamza-109413300/"
+            >
+              <FaLinkedin />
+            </a>
           </div>
         </div>
 
@@ -173,9 +177,7 @@ const Footer = () => {
               nationwide delivery, and a passion for quality that speaks for
               itself.
             </p>
-            <div
-              className="credit-cards mt-5 text-center width-full flex gap-5"
-            >
+            <div className="credit-cards mt-5 text-center width-full flex gap-5">
               <img
                 height="3 We accept: 0"
                 src="https://shoplineimg.com/assets/footer/card_visa.png"
@@ -230,25 +232,31 @@ const Footer = () => {
             </p>
             <Link to={"/"} className="flex items-center gap-2">
               <IoMailOutline className="text-[#c5172e] text-2xl" />
-              hamza-dev@gmail.com
+              hamza036513@gmail.com
             </Link>
             <Link to={"/"} className="flex items-center gap-2">
               <IoCallOutline className="text-[#c5172e] text-2xl" />
-              03485379552
+              0348-5379552
             </Link>
             <div className="flex gap-3 mt-5 [&>a]:bg-[#eeeeee] [&>a]:p-3 [&>a]:rounded-full [&>a]:hover:bg-[#c5172e] [&>a]:hover:text-white [&>a]:transition [&>a]:duration-300 [&>a]:ease-in-out">
-              <Link to={"/"}>
+              <a
+                target="_blank"
+                href="https://www.facebook.com/profile.php?id=100028870688884"
+              >
                 <FaFacebookF />
-              </Link>
-              <Link to={"/"}>
+              </a>
+              <a target="_blank" href="https://www.instagram.com/m.hamza_101/">
                 <FaInstagram />
-              </Link>
-              <Link to={"/"}>
-                <FaWhatsapp />
-              </Link>
-              <Link to={"/"}>
-                <BsTwitterX />
-              </Link>
+              </a>
+              <a target="_blank" href="https://github.com/Hamzaa09/">
+                <FaGithub />
+              </a>
+              <a
+                target="_blank"
+                href="https://www.linkedin.com/in/muhammad-hamza-109413300/"
+              >
+                <FaLinkedin />
+              </a>
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import ErrorBoundary from "../utilities/ErrorBoundary.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  // <StrictMode>
     <ContextProdvider>
       <Provider store={store}>
         <ErrorBoundary>
@@ -19,5 +19,5 @@ createRoot(document.getElementById("root")).render(
         </ErrorBoundary>
       </Provider>
     </ContextProdvider>
-  </StrictMode>
+  // </StrictMode>
 );

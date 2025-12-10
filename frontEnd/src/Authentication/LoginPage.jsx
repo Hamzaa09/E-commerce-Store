@@ -44,6 +44,7 @@ const Login = () => {
       toast.error(response?.payload?.message || "Something went wrong");
       return;
     }
+
     toast.success("Login Successfull!");
     navigate("/user");
   };

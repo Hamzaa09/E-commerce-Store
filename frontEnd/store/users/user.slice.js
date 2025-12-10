@@ -55,7 +55,7 @@ export const userSlice = createSlice({
     builder.addCase(loginUserThunk.fulfilled, (state, action) => {
       state.screenLoading = false;
       state.authCheck = true;
-      state.userProfile = action.payload?.User;
+      state.userProfile = action.payload.response.user;
     });
     builder.addCase(loginUserThunk.rejected, (state, action) => {
       state.screenLoading = false;
@@ -65,7 +65,6 @@ export const userSlice = createSlice({
     // get user
     builder.addCase(getUserThunk.pending, (state, action) => {
       state.screenLoading = true;
-      state.userProfile = null;
     });
     builder.addCase(getUserThunk.fulfilled, (state, action) => {
       state.screenLoading = false;
@@ -79,9 +78,7 @@ export const userSlice = createSlice({
     });
 
     // get all users count
-    builder.addCase(getAllUsersCountThunk.pending, (state, action) => {
-      state.userProfile = null;
-    });
+    builder.addCase(getAllUsersCountThunk.pending, (state, action) => {});
     builder.addCase(getAllUsersCountThunk.fulfilled, (state, action) => {
       state.allUsersCount = action.payload?.getAllUsersCount;
       state.nationalCustomers = action.payload?.nationalCustomers;
@@ -89,9 +86,7 @@ export const userSlice = createSlice({
     builder.addCase(getAllUsersCountThunk.rejected, (state, action) => {});
 
     // get all users
-    builder.addCase(getAllUsersThunk.pending, (state, action) => {
-      state.userProfile = null;
-    });
+    builder.addCase(getAllUsersThunk.pending, (state, action) => {});
     builder.addCase(getAllUsersThunk.fulfilled, (state, action) => {
       state.allUsers = action.payload?.allUsers;
     });
@@ -128,7 +123,7 @@ export const userSlice = createSlice({
       state.screenLoading = true;
     });
     builder.addCase(signupUserGoogleThunk.fulfilled, (state, action) => {
-      state.userProfile = action.payload;
+      state.userProfile = action.payload.response.user;
       state.screenLoading = false;
       state.authCheck = true;
     });
@@ -143,7 +138,7 @@ export const userSlice = createSlice({
       state.screenLoading = true;
     });
     builder.addCase(signupUserFacebookThunk.fulfilled, (state, action) => {
-      state.userProfile = action.payload;
+      state.userProfile = action.payload.response.user;
       state.screenLoading = false;
       state.authCheck = true;
     });

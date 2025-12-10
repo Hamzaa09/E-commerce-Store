@@ -34,7 +34,9 @@ const CartPage = () => {
 
   useEffect(() => {
     dispatch(getCartThunk());
-  }, [dispatch]);
+  }, []);
+
+  useEffect(() => {}, [cart]);
 
   useEffect(() => {
     if (cartProducts) {

@@ -41,6 +41,8 @@ const PopularProducts = () => {
     const response = dispatch(getPopularProductsThunk({ rating: true }));
   }, []);
 
+  useEffect(() => {}, [popProducts]);
+
   return (
     <div
       onMouseEnter={() => setButtondisplay(true)}
@@ -93,8 +95,6 @@ const PopularProducts = () => {
                   -{product.productDiscount}%
                 </span>
               )}
-
-              
             </div>
 
             <p className="text-center font-medium text-Gray text-md lg:text-lg">

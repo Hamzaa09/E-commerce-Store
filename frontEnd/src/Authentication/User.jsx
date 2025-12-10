@@ -38,6 +38,7 @@ const User = () => {
   }, []);
 
   useEffect(() => {
+    console.log(userProfile);
   }, [allOrders, userProfile]);
 
   useEffect(() => {
@@ -237,11 +238,7 @@ const User = () => {
             onClick={handleLogout}
             className="bg-Red text-white py-2 lg:py-2 text-sm lg:text-md  font-medium w-[30%] bigSm:w-[20%] md:w-[14%] lg:w-[10%] rounded-md border border-Red hover:cursor-pointer transition duration-200 ease-in-out mt-2 lg:mt-5 active:translate-y-1"
           >
-            {screenLoading ? (
-              <div className="loading loading-spinner loading-md"></div>
-            ) : (
-              <span className="md:text-base">Logout</span>
-            )}
+            <span className="md:text-base">Logout</span>
           </button>
         </div>
       </form>

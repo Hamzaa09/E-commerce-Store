@@ -24,6 +24,10 @@ export const signupUser = asyncHandler(async (req, res, next) => {
   });
 
   generateToken(res, User, 200);
+  res.status(200).json({
+    success: true,
+    User,
+  });
 });
 
 export const loginUser = asyncHandler(async (req, res, next) => {
@@ -39,6 +43,10 @@ export const loginUser = asyncHandler(async (req, res, next) => {
     return next(new ErrorHandler("Wrong Email or Password!", 401));
 
   generateToken(res, User, 200);
+  res.status(200).json({
+    success: true,
+    User,
+  });
 });
 
 export const updateUser = asyncHandler(async (req, res, next) => {
@@ -147,6 +155,10 @@ export const signupUserGoogle = asyncHandler(async (req, res, next) => {
   }
 
   generateToken(res, User, 200);
+  res.status(200).json({
+    success: true,
+    User,
+  });
 });
 
 export const signupUserFacebook = asyncHandler(async (req, res, next) => {
@@ -170,6 +182,10 @@ export const signupUserFacebook = asyncHandler(async (req, res, next) => {
   }
 
   generateToken(res, User, 200);
+  res.status(200).json({
+    success: true,
+    User,
+  });
 });
 
 //cart , favorite & orders

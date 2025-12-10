@@ -46,6 +46,8 @@ const DealSection = () => {
     }
   }, [dealsProducts]);
 
+  useEffect(() => {}, [dealsProducts]);
+
   return (
     <div
       onMouseEnter={() => setButtondisplay(true)}
@@ -99,8 +101,6 @@ const DealSection = () => {
                   -{product.productDiscount}%
                 </span>
               )}
-
-              
             </div>
 
             <p className="text-center font-medium text-Gray text-md lg:text-lg">

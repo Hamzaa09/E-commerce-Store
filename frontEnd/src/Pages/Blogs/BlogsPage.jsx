@@ -30,9 +30,9 @@ const BlogsPage = () => {
           allblogs.map((blog, index) => (
             <div
               key={index}
-              className="md:w-[calc(50%-0.375rem)] xl:w-[calc(33%-0.375rem)] group h-[55vh] w-full flex flex-col gap-2 justify-around"
+              className="md:w-[calc(50%-0.375rem)] xl:w-[calc(33%-0.375rem)] group h-[45vh] md:h-[55vh] w-full flex flex-col gap-2 justify-around"
             >
-              <div className="relative group h-[75%] mb-2 flex justify-center items-center overflow-hidden">
+              <div className="relative group h-[70%] mb-2 flex justify-center items-center overflow-hidden">
                 <img
                   src={blog.blogImage}
                   className="h-full w-full transition-all duration-1000 ease-in-out object-cover"
@@ -40,13 +40,17 @@ const BlogsPage = () => {
                 />
               </div>
 
-              <p className="text-Red font-bold text-md">{blog.blogDate.split("T",1)[0]}</p>
-              <h3 className="text-md md:text-xl md:py-1 font-medium">
-                {blog.blogTitle}
-              </h3>
-              <h4 className="text-md md:text-xl text-Gray">
-                {blog.blogContent}
-              </h4>
+              <div className="h-[30%] flex flex-col">
+                <p className="text-Red font-bold text-md">
+                  {blog.blogDate.split("T", 1)[0]}
+                </p>
+                <h3 className="text-md md:text-xl md:py-1 font-medium">
+                  {blog.blogTitle}
+                </h3>
+                <h4 className="text-md md:text-xl text-Gray">
+                  {blog.blogContent}
+                </h4>
+              </div>
             </div>
           ))
         ) : (

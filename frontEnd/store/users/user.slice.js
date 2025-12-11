@@ -64,7 +64,6 @@ export const userSlice = createSlice({
 
     // get user
     builder.addCase(getUserThunk.pending, (state, action) => {
-      state.screenLoading = true;
     });
     builder.addCase(getUserThunk.fulfilled, (state, action) => {
       state.screenLoading = false;
@@ -112,6 +111,9 @@ export const userSlice = createSlice({
       state.authCheck = false;
       state.screenLoading = false;
       state.userProfile = null;
+      state.cart = [];
+      state.cartLength = 0;
+      state.orders = [];
     });
     builder.addCase(logoutUserThunk.rejected, (state, action) => {
       state.screenLoading = false;

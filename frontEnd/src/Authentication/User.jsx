@@ -37,9 +37,7 @@ const User = () => {
     dispatch(getAllOrdersThunk());
   }, []);
 
-  useEffect(() => {
-    console.log(userProfile);
-  }, [allOrders, userProfile]);
+  useEffect(() => {}, [allOrders, userProfile]);
 
   useEffect(() => {
     if (userProfile) {
@@ -113,7 +111,7 @@ const User = () => {
           onClick={() => setUpdateForm(() => setUpdateForm(false))}
         >
           {/* name */}
-          <div className="flex">
+          <div className="flex gap-2">
             <h2>Name:</h2>
             <div className="flex flex-col">
               <input
@@ -124,7 +122,7 @@ const User = () => {
                     value.length >= 2 ||
                     "Name must be at least 2 characters",
                 })}
-                className="outline-0 text-right hover:cursor-text"
+                className="outline-0 text-right hover:cursor-text w-full"
                 id="name"
                 disabled={updateForm}
               />
@@ -139,7 +137,7 @@ const User = () => {
             <div className="text-end">{userProfile?.email}</div>
           </div>
           {/* country name */}
-          <div className="flex">
+          <div className="flex gap-2">
             <h2>Country:</h2>
             <div className="flex flex-col">
               <input
@@ -150,7 +148,7 @@ const User = () => {
                     value.length >= 2 ||
                     "Invalid Country Name!",
                 })}
-                className="outline-0 text-right hover:cursor-text"
+                className="outline-0 text-right hover:cursor-text w-full"
                 id="country"
                 disabled={updateForm}
               />
@@ -160,7 +158,7 @@ const User = () => {
             </div>
           </div>
           {/* number */}
-          <div className="flex">
+          <div className="flex gap-2">
             <h2>Contact Number:</h2>
             <div className="flex flex-col">
               <input
@@ -172,7 +170,7 @@ const User = () => {
                       "Number must be exactly 11 digits!";
                   },
                 })}
-                className="outline-0 text-right hover:cursor-text"
+                className="outline-0 text-right hover:cursor-text w-full" 
                 disabled={updateForm}
               />
               <span className="text-sm md:text-base text-Red text-right">
@@ -181,7 +179,7 @@ const User = () => {
             </div>
           </div>
           {/* address  */}
-          <div className="flex">
+          <div className="flex gap-2">
             <h2>Address:</h2>
             <div className="flex flex-col">
               <input
@@ -190,7 +188,7 @@ const User = () => {
                   validate: (value) =>
                     value === "" || value.length >= 2 || "Invalid Address!",
                 })}
-                className="outline-0 text-right hover:cursor-text"
+                className="outline-0 text-right hover:cursor-text w-full"
                 disabled={updateForm}
               />
               <span className="text-sm md:text-base text-Red text-right">

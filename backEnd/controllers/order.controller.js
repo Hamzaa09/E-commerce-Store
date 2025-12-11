@@ -55,11 +55,15 @@ export const getAllOrders = asyncHandler(async (req, res, next) => {
 });
 
 export const getAllOrdersCount = asyncHandler(async (req, res, next) => {
-  const products = await ProductModel.find({}).countDocuments();
+  const users = await UserModel.find({});
+
+  let sum = users.map((user) => user.orders.length);
+
+  const result = sum.reduce((s, sum) => s + sum, 0);
 
   res.status(200).json({
     success: true,
-    response: { orderedProductsCount: products },
+    response: { orderedProductsCount: result },
   });
 });
 

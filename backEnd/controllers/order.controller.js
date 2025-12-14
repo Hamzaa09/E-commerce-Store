@@ -70,11 +70,9 @@ export const getAllOrdersCount = asyncHandler(async (req, res, next) => {
 export const getAllOrdersAdmin = asyncHandler(async (req, res, next) => {
   const users = await UserModel.find({});
 
-  const productsIds = users.map((user) =>
-    user.orders.map((element) => {
-      return element.product.toString();
-    })
-  );
+  const allProducts = users.flatMap((user) => user.orders || []);
+
+  const productsIds = allProducts.map((prod) => prod.product.toString());
 
   const products = await Promise.all(
     productsIds.map(async (ids) => {

@@ -26,7 +26,7 @@ const NewsLetter = () => {
     }
   };
   return (
-    <div className="relative w-full h-[35vh] sm:h-[22vh] lg:h-[25vh] 2xl:h-[40vh] mt-20 px-20 flex justify-center tracking-wider">
+    <div className="relative w-full h-[35vh] sm:h-[22vh] lg:h-[25vh] 2xl:h-[40vh] mt-5 md:mt-10 lg:mt-20 px-20 flex justify-center tracking-wider">
       <img
         src="/newsLetter/img1.jpg"
         className="absolute w-full h-full z-[-1] object-cover object-bottom opacity-85"

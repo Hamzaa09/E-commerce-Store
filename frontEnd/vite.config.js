@@ -6,6 +6,7 @@ import inject from "@rollup/plugin-inject";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
+    import("@tailwindcss/line-clamp"),
     react(),
     tailwindcss(),
     inject({
@@ -16,5 +17,5 @@ export default defineConfig({
   ],
   server: {
     host: true,
-  }
+  },
 });

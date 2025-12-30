@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
 import MainSlider from "./Components/MainSlider";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import OwlCarousel from "./Components/OwlCarousel";
-import ProductsSection from "./Components/ProductsSection";
 import Banner from "./Components/Banner";
 import Services from "./Components/Services";
 import PromoBanner from "./Components/PromoBanner";
@@ -13,11 +11,9 @@ import ScrollToTopButton from "./Components/ScrollToTopButton";
 import PopularProducts from "./Components/PopularProduts";
 import DealSection from "./Components/DealSection";
 import TagLine from "./Components/TagLine";
-import { useDispatch } from "react-redux";
-import { getPopularProductsThunk } from "../../../store/products/product.thunk";
+import ProductsSection from "./Components/ProductsSection";
 
 const Home = () => {
- 
   return (
     <div className="relative">
       <ScrollToTopButton />

@@ -16,6 +16,7 @@ import {
 import toast from "react-hot-toast";
 import BreadCrum from "../Pages/Landing/Components/BreadCrum";
 import { getAllOrdersThunk } from "../../store/orders/order.thunk";
+import { Link } from "react-router-dom";
 
 const User = () => {
   const { userProfile, screenLoading } = useSelector(
@@ -170,7 +171,7 @@ const User = () => {
                       "Number must be exactly 11 digits!";
                   },
                 })}
-                className="outline-0 text-right hover:cursor-text w-full" 
+                className="outline-0 text-right hover:cursor-text w-full"
                 disabled={updateForm}
               />
               <span className="text-sm md:text-base text-Red text-right">
@@ -231,6 +232,13 @@ const User = () => {
               : "h-fit opacity-100 pointer-events-auto"
           } w-full flex gap-2 py-2 justify-end items-center px-2 md:justify-end md:items-end`}
         >
+          <Link
+            to={"/admin/dashboard"}
+            className="bg-Red flex justify-center items-center text-white py-2 lg:py-2 text-sm lg:text-md  font-medium w-[30%] bigSm:w-[20%] md:w-[14%] lg:w-[10%] rounded-md border border-Red hover:cursor-pointer transition duration-200 ease-in-out mt-2 lg:mt-5 active:translate-y-1"
+          >
+            <span className="md:text-base">Dashboard</span>
+          </Link>
+
           <button
             type="button"
             onClick={handleLogout}

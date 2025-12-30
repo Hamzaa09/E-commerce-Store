@@ -25,7 +25,9 @@ const initialState = {
   totalPages: null,
   totalProducts: null,
   whichfilter: null,
-  productLoading: false,
+  dealsProductsLoading: false,
+  latestProductsLoading: false,
+  popularProductsLoading: false,
   prodBrands: [],
   prodCategories: [],
   collectionProducts: [],
@@ -103,27 +105,27 @@ export const productSlice = createSlice({
 
     //popular products
     builder.addCase(getPopularProductsThunk.pending, (state, action) => {
-      state.productLoading = true;
+      state.popularProductsLoading = true;
     });
     builder.addCase(getPopularProductsThunk.fulfilled, (state, action) => {
-      state.productLoading = false;
+      state.popularProductsLoading = false;
       state.popProducts = action?.payload?.response?.products;
     });
     builder.addCase(getPopularProductsThunk.rejected, (state, action) => {
-      state.productLoading = false;
+      state.popularProductsLoading = false;
       state.allProducts = [];
     });
 
     //deals products
     builder.addCase(getDealsProductsThunk.pending, (state, action) => {
-      state.productLoading = true;
+      state.dealsProductsLoading = true;
     });
     builder.addCase(getDealsProductsThunk.fulfilled, (state, action) => {
-      state.productLoading = false;
+      state.dealsProductsLoading = false;
       state.dealsProducts = action?.payload?.response?.products;
     });
     builder.addCase(getDealsProductsThunk.rejected, (state, action) => {
-      state.productLoading = false;
+      state.dealsProductsLoading = false;
       state.allProducts = [];
     });
 

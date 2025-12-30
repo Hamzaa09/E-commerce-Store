@@ -25,6 +25,7 @@ import {
   deleteCartThunk,
   getCartThunk,
 } from "../../../store/users/user.thunk";
+import ShopPageSkeleton from "../../Skeletons/ShopPageSkeleton";
 
 const ShopPage = () => {
   const navigate = useNavigate();
@@ -594,17 +595,18 @@ const ShopPage = () => {
                   list ? "flex-col" : "flex-row"
                 } flex-wrap gap-x-3 gap-y-10 lg:gap-y-5 mt-10 md:mt-15 lg:mt-0`}
               >
-                {!allProducts.length && !productLoading ? (
+                {!allProducts.length && !productLoading && (
                   <div className="mainHeading flex flex-col justify-start items-start md:justify-center md:items-center mb-15 tracking-wide px-5 mt-5 md:px-10 lg:mt-10 2xl:w-[1500px] 2xl:mx-auto">
                     <h1 className="py-3 text-center text-2xl md:text-4xl font-bold">
                       No Product Found
                     </h1>
                     <span className="bg-Red w-[100px] lg:w-[10%] h-1"></span>
                   </div>
-                ) : (
-                  <></>
                 )}
-                {allProducts ? (
+
+                {productLoading ? (
+                  <ShopPageSkeleton />
+                ) : (
                   allProducts.map((product, index) => (
                     <div
                       onClick={() => navigate(`/singleProduct/${product._id}`)}
@@ -654,7 +656,6 @@ const ShopPage = () => {
                         ) : (
                           <></>
                         )}
-                        
                       </div>
 
                       {/* content  */}
@@ -722,8 +723,6 @@ const ShopPage = () => {
                       </div>
                     </div>
                   ))
-                ) : (
-                  <ClipLoader />
                 )}
               </div>
             </div>

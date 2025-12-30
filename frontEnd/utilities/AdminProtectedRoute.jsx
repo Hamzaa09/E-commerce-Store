@@ -14,7 +14,8 @@ const ProtectedRoute = ({ role }) => {
   const [Admin, setAdmin] = useState(false);
 
   useEffect(() => {
-    if (role === "admin") setAdmin(true);
+    // if (role === "admin") setAdmin(true);
+    setAdmin(true);
   }, [role]);
 
   if (!Admin) {

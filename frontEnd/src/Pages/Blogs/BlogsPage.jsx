@@ -8,6 +8,7 @@ import BreadCrum from "../Landing/Components/BreadCrum";
 import { useDispatch, useSelector } from "react-redux";
 import { getBlogThunk } from "../../../store/blogs/blog.thunk";
 import { ClipLoader } from "react-spinners";
+import BlogSkeleton from "../../Skeletons/BlogSkeleton";
 
 const BlogsPage = () => {
   const dispatch = useDispatch();
@@ -26,13 +27,19 @@ const BlogsPage = () => {
       <BreadCrum />
 
       <div className="px-5 mt-10 md:mt-15 md:px-10 lg:mt-20 2xl:w-[1500px] 2xl:mx-auto w-full h-fit flex gap-3 gap-y-15 flex-wrap">
-        {allblogs ? (
+        {blogLoading ? (
+          <div className="w-full flex justify-center items-center gap-2">
+            <BlogSkeleton />
+            <BlogSkeleton />
+            <BlogSkeleton />
+          </div>
+        ) : (
           allblogs.map((blog, index) => (
             <div
               key={index}
               className="md:w-[calc(50%-0.375rem)] xl:w-[calc(33%-0.375rem)] group h-[35vh] lg:h-[45vh] w-full flex flex-col gap-2 justify-around"
             >
-              <div className="relative group h-[70%] mb-2 flex justify-center items-center overflow-hidden">
+              <div className="relative group min-h-[70%] mb-2 flex justify-center items-center overflow-hidden">
                 <img
                   src={blog.blogImage}
                   className="h-full w-full transition-all duration-1000 ease-in-out object-cover"
@@ -40,7 +47,7 @@ const BlogsPage = () => {
                 />
               </div>
 
-              <div className="h-[30%] flex flex-col">
+              <div className="h-[30%] flex flex-col pr-5">
                 <p className="text-Red font-bold text-md">
                   {blog.blogDate.split("T", 1)[0]}
                 </p>
@@ -53,10 +60,6 @@ const BlogsPage = () => {
               </div>
             </div>
           ))
-        ) : (
-          <div className="w-full flex justify-center items-start">
-            <ClipLoader />
-          </div>
         )}
       </div>
 

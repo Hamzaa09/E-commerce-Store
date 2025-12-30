@@ -20,6 +20,7 @@ import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import BreadCrum from "../Landing/Components/BreadCrum";
+import ShopPageSkeleton from "../../Skeletons/ShopPageSkeleton";
 
 const SneakersPage = () => {
   const [filters, setFilters] = useState({
@@ -38,15 +39,12 @@ const SneakersPage = () => {
   const [page, setPage] = useState(1);
   const [hover, setHover] = useState(null);
   const dispatch = useDispatch();
-  const {
-    allSneakers,
-    sneakerPages,
-    productLoading,
-    prodBrands,
-  } = useSelector((state) => state.productSlice);
+  const { allSneakers, sneakerPages, productLoading, prodBrands } = useSelector(
+    (state) => state.productSlice
+  );
 
   useEffect(() => {
-    const response = dispatch(getSneakersThunk({filters, page}));
+    const response = dispatch(getSneakersThunk({ filters, page }));
   }, [page, filters]);
 
   useEffect(() => {
@@ -81,7 +79,7 @@ const SneakersPage = () => {
       <div className="relative w-full">
         <ScrollToTopButton />
         <TagLine />
-        <Navbar value="sneakers"/>
+        <Navbar value="sneakers" />
 
         <div
           className={`relative w-full ${!filter ? "overflow-x-hidden" : ""}`}
@@ -497,17 +495,18 @@ const SneakersPage = () => {
                   list ? "flex-col" : "flex-row"
                 } flex-wrap gap-x-3 gap-y-10 lg:gap-y-5 mt-10 md:mt-15 lg:mt-0`}
               >
-                {!allSneakers && !productLoading ? (
+                {!allSneakers && !productLoading && (
                   <div className="mainHeading flex flex-col justify-start items-start md:justify-center md:items-center mb-15 tracking-wide px-5 mt-5 md:px-10 lg:mt-10 2xl:w-[1500px] 2xl:mx-auto">
                     <h1 className="py-3 text-center text-2xl md:text-4xl font-bold">
                       No Product Found
                     </h1>
                     <span className="bg-Red w-[100px] lg:w-[10%] h-1"></span>
                   </div>
-                ) : (
-                  <></>
                 )}
-                {allSneakers.length && !productLoading ? (
+
+                {productLoading ? (
+                  <ShopPageSkeleton />
+                ) : (
                   allSneakers.map((product, index) => (
                     <Link
                       to={`/singleProduct/${product._id}`}
@@ -557,7 +556,6 @@ const SneakersPage = () => {
                         ) : (
                           <></>
                         )}
-                        
                       </div>
 
                       {/* content  */}
@@ -625,8 +623,6 @@ const SneakersPage = () => {
                       </div>
                     </Link>
                   ))
-                ) : (
-                  <ClipLoader />
                 )}
               </div>
             </div>

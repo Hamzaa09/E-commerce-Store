@@ -22,6 +22,7 @@ import toast from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
 import { getPaymentThunk } from "../../../store/payment/payment.thunk";
 import ProductsSection from "../Landing/Components/ProductsSection";
+import SingleProductSkeleton from "../../Skeletons/SingleProdSkeleton";
 
 const SingleProductPage = () => {
   const { id } = useParams();
@@ -118,12 +119,12 @@ const SingleProductPage = () => {
       {singleProd && <BreadCrum value={singleProd?.productName} />}
 
       {/* main div  */}
-      <div className="mb-20 w-full h-full flex flex-col md:flex-row md:justify-around lg:gap-4 px-5 mt-5 md:px-10 lg:mt-10 2xl:w-[1500px] 2xl:mx-auto">
+      <div className="mb-20 w-full h-full flex flex-col md:flex-row md:justify-around md:gap-4 px-5 mt-5 md:px-10 lg:mt-10 2xl:w-[1500px] 2xl:mx-auto">
         {singleProd ? (
           <>
             {/* images  */}
-            <div className="md:sticky md:self-start md:top-0 md:w-1/2 flex flex-col justify-center items-center">
-              <div className="w-[60%] md:w-full">
+            <div className="md:sticky md:self-start  md:top-0 md:w-1/2 flex flex-col justify-center items-center">
+              <div className="w-[60%] md:w-[80%] flex justify-center items-center">
                 <img
                   src={image}
                   alt=""
@@ -246,7 +247,7 @@ const SingleProductPage = () => {
                   <div className="flex items-center text-lg font-medium text-black">
                     <div
                       className={`${
-                        singleProd.productStock
+                        singleProd?.productStock
                           ? "border-green-500"
                           : "border-red-500"
                       } p-[2px] rounded-full border-1  flex justify-center items-center mr-1`}
@@ -278,13 +279,13 @@ const SingleProductPage = () => {
                     </div>
 
                     <button
-                      onClick={() => handleClick({ id: singleProd._id })}
+                      onClick={() => handleClick({ id: singleProd?._id })}
                       className={`p-2 w-full h-full ${
-                        singleProd.productStock > 0
+                        singleProd?.productStock > 0
                           ? "bg-[#c5172e] text-white hover:cursor-pointer opacity-100"
                           : "bg-[#c5172e] text-white hover:cursor-not-allowed opacity-50"
                       } transition duration-200 ease-in-out active:translate-y-1 flex justify-around items-center text-xl font-medium`}
-                      disabled={singleProd.productStock > 0 ? false : true}
+                      disabled={singleProd?.productStock > 0 ? false : true}
                     >
                       Add to Cart
                     </button>
@@ -294,11 +295,11 @@ const SingleProductPage = () => {
                 <button
                   onClick={handleBuy}
                   className={`p-2 w-[80%] sm:w-[60%] h-full bg-white border border-Gray text-Gray ${
-                    singleProd.productStock > 0
+                    singleProd?.productStock > 0
                       ? "hover:cursor-pointer hover:bg-black hover:border-black hover:text-white opacity-100"
                       : "hover:cursor-not-allowed opacity-50"
                   } transition duration-200 ease-in-out active:translate-y-1 flex justify-around items-center text-lg font-medium`}
-                  disabled={singleProd.productStock > 0 ? false : true}
+                  disabled={singleProd?.productStock > 0 ? false : true}
                 >
                   BUY NOW
                 </button>
@@ -379,7 +380,7 @@ const SingleProductPage = () => {
             </div>
           </>
         ) : (
-          <ClipLoader />
+          <SingleProductSkeleton />
         )}
       </div>
 

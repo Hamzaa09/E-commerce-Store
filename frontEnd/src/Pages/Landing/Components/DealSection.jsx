@@ -49,7 +49,7 @@ const DealSection = () => {
   }, [dealsProducts]);
 
   useEffect(() => {
-    if (dealsProducts.length) {
+    if (dealsProducts?.length) {
       setMounted(true);
     }
   }, [dealsProducts]);

@@ -16,7 +16,7 @@ const LatestBlogs = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (allblogs.length) {
+    if (allblogs?.length) {
       setMounted(true);
     }
   }, [allblogs]);

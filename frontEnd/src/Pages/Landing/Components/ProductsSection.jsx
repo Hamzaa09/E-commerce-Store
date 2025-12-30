@@ -53,7 +53,7 @@ const ProductsSection = () => {
   }, [halfAllProducts]);
 
   useEffect(() => {
-    if (halfAllProducts.length) {
+    if (halfAllProducts?.length) {
       setMounted(true);
     }
   }, [halfAllProducts]);

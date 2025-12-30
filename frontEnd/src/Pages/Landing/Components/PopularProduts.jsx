@@ -45,7 +45,7 @@ const PopularProducts = () => {
   }, []);
 
   useEffect(() => {
-    if (popProducts.length) {
+    if (popProducts?.length) {
       setMounted(true);
     }
   }, [popProducts]);

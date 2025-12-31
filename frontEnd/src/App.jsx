@@ -38,8 +38,6 @@ function App() {
 
   useEffect(() => {
     dispatch(getUserThunk());
-    dispatch(getAllUsersCountThunk());
-    dispatch(getAllOrdersCountThunk());
     dispatch(getAllProductThunk());
   }, [dispatch]);
 

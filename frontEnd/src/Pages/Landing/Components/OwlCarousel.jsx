@@ -110,12 +110,12 @@ const ReactOwlCarouselSection = () => {
   const navigate = useNavigate();
 
   const imagesArray = [
-    "Logo-1.png",
-    "Logo-2.png",
-    "Logo-3.png",
-    "Logo-4.png",
-    "Logo-5.png",
-    "Logo-6.png",
+    "Logo-1.jpeg",
+    "Logo-2.jpeg",
+    "Logo-3.jpeg",
+    "Logo-4.jpeg",
+    "Logo-5.jpeg",
+    "Logo-6.jpeg",
   ];
 
   const promoArray = [
@@ -183,8 +183,10 @@ const ReactOwlCarouselSection = () => {
             >
               <img
                 src={`/promotionOne/${promo.src}`}
-                className="w-full h-full object-cover hover:scale-107 hover:cursor-pointer transition duration-1000 ease-in-out"
-                alt=""
+                alt={promo.h2}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000 ease-in-out cursor-pointer"
               />
               <div className="absolute bottom-3 lg:bottom-7 w-full text-white px-1">
                 <h2 className="text-center font-bold text-lg md:text-2xl mb-1">

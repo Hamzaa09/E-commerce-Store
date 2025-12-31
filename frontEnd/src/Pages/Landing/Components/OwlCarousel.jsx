@@ -202,7 +202,6 @@ const ReactOwlCarouselSection = () => {
             </div>
           ))}
         </div>
-        //{" "}
       </div>
     </>
   );

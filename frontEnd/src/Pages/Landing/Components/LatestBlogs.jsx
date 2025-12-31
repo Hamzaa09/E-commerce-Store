@@ -41,21 +41,35 @@ const LatestBlogs = () => {
       </div>
       {/* Carousel */}
       <div className="relative">
-        <OwlCarousel
-          ref={carouselRef}
-          className="owl-theme"
-          loop
-          margin={10}
-          nav={false}
-          dots={false}
-          responsive={{
-            0: { items: 1 },
-            600: { items: 2 },
-            1000: { items: 3 },
-          }}
-        >
-          {allblogs?.length > 0 ? (
-            allblogs?.map((blog, index) => (
+        {!allblogs ? (
+          <div className="flex w-full justify-start gap-2 overflow-x-hidden">
+            <div className="bigSm:w-1/2 lg:w-1/3 w-full block">
+              <BlogSkeleton />
+            </div>
+
+            <div className="hidden bigSm:w-1/2 lg:w-1/3  bigSm:block pl-4 lg:px-4">
+              <BlogSkeleton />
+            </div>
+
+            <div className="hidden bigSm:w-1/2 lg:w-1/3  lg:block">
+              <BlogSkeleton />
+            </div>
+          </div>
+        ) : (
+          <OwlCarousel
+            ref={carouselRef}
+            className="owl-theme"
+            loop
+            margin={10}
+            nav={false}
+            dots={false}
+            responsive={{
+              0: { items: 1 },
+              600: { items: 2 },
+              1024: { items: 3 },
+            }}
+          >
+            {allblogs?.map((blog, index) => (
               <Link
                 key={index}
                 to="/blogs"
@@ -84,11 +98,9 @@ const LatestBlogs = () => {
                   </p>
                 </div>
               </Link>
-            ))
-          ) : (
-            <BlogSkeleton />
-          )}
-        </OwlCarousel>
+            ))}
+          </OwlCarousel>
+        )}
       </div>
 
       {/* Custom Buttons */}

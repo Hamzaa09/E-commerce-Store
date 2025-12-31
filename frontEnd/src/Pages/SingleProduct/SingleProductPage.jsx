@@ -23,7 +23,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import { getPaymentThunk } from "../../../store/payment/payment.thunk";
 import ProductsSection from "../Landing/Components/ProductsSection";
 import SingleProductSkeleton from "../../Skeletons/SingleProdSkeleton";
-import OwlCarousel from "react-owl-carousel";
+import {OwlCarousel} from "react-owl-carousel";
+
 const SingleProductPage = () => {
   const { id } = useParams();
   const [value, setValue] = useState(1);

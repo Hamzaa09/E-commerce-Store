@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
-import OwlCarousel from "react-owl-carousel";import { useNavigate } from "react-router-dom";
+import {OwlCarousel} from "react-owl-carousel";
+import { useNavigate } from "react-router-dom";
 
 const MainSlider = () => {
   const navigate = useNavigate();

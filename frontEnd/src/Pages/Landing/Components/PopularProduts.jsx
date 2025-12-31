@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPopularProductsThunk } from "../../../../store/products/product.thunk";
 import { Link } from "react-router-dom";
 import DealsSkeleton from "../../../Skeletons/DealsSkeleton";
-import OwlCarousel from "react-owl-carousel";import "owl.carousel/dist/assets/owl.carousel.css";
+import {OwlCarousel} from "react-owl-carousel";
+import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import CarousalSkeleton from "../../../Skeletons/CarousalSkeleton";
 

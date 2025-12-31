@@ -41,7 +41,7 @@ const LatestBlogs = () => {
       </div>
       {/* Carousel */}
       <div className="relative">
-        {!allblogs ? (
+        {blogLoading ? (
           <div className="flex w-full justify-start gap-2 overflow-x-hidden">
             <div className="bigSm:w-1/2 lg:w-1/3 w-full block">
               <BlogSkeleton />

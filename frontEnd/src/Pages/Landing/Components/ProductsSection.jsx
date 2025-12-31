@@ -7,6 +7,7 @@ import DealsSkeleton from "../../../Skeletons/DealsSkeleton";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
+import CarousalSkeleton from "../../../Skeletons/CarousalSkeleton";
 
 const ProductsSection = () => {
   const dispatch = useDispatch();
@@ -47,25 +48,27 @@ const ProductsSection = () => {
       </div>
 
       {/* Carousel */}
-      <div className="relative">
-        <OwlCarousel
-          ref={carouselRef}
-          className="owl-theme"
-          loop
-          margin={15}
-          nav={false}
-          dots={false}
-          responsive={{
-            0: { items: 1 },
-            300: { items: 2 },
-            600: { items: 3 },
-            1000: { items: 4 },
-          }}
-        >
-          {!halfAllProducts ? (
-            <DealsSkeleton />
-          ) : (
-            halfAllProducts?.map((product) => (
+      {productLoading ? (
+        <div className="flex gap-4">
+          <CarousalSkeleton />
+        </div>
+      ) : (
+        <div className="relative">
+          <OwlCarousel
+            ref={carouselRef}
+            className="owl-theme"
+            loop
+            margin={15}
+            nav={false}
+            dots={false}
+            responsive={{
+              0: { items: 1 },
+              300: { items: 2 },
+              600: { items: 3 },
+              1000: { items: 4 },
+            }}
+          >
+            {halfAllProducts?.map((product) => (
               <Link
                 onClick={handleClick}
                 to={`/singleProduct/${product._id}`}
@@ -138,10 +141,10 @@ const ProductsSection = () => {
                   </p>
                 </div>
               </Link>
-            ))
-          )}
-        </OwlCarousel>
-      </div>
+            ))}
+          </OwlCarousel>
+        </div>
+      )}
 
       {/* Buttons */}
       <button

@@ -86,6 +86,8 @@ const OrdersDiv = ({ value }) => {
                     <td className="pl-4">{rowNumber}</td>
                     <td className="flex justify-start items-center gap-3">
                       <img
+                        loading="lazy"
+                        decoding="async"
                         className="w-12 h-12 rounded-full"
                         src="/ProfilePhoto.jpeg"
                         alt="Rounded avatar"
@@ -151,6 +153,8 @@ const OrderItem = ({ item, productMap }) => (
         className="w-10 h-10 rounded-sm shadow-2xl"
         src={productMap[item.product]?.productImages?.[0]}
         alt="Product"
+        loading="lazy"
+        decoding="async"
       />
       <p className="break-words">{productMap[item.product]?.productName}</p>
     </div>

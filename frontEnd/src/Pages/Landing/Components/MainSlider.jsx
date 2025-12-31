@@ -1,51 +1,55 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import OwlCarousel from "react-owl-carousel";
 
 const MainSlider = () => {
   const navigate = useNavigate();
-  const [buttondisplay, setButtondisplay] = useState(false);
+  const [buttonDisplay, setButtonDisplay] = useState(false);
+  const carouselRef = useRef(null);
 
   const imgArr = [
     {
-      src: "/mainSlider/imageOne.jpg",
+      src: "/mainSlider/imageOne1.jpg",
       h1: "VANS SPORTS RUNNING SHOES FOR MEN",
       p: "2025 LIMITED EDITION",
       text_color: "text-black",
     },
     {
-      src: "/mainSlider/imageTwo.jpg",
+      src: "/mainSlider/imageTwo2.jpg",
       h1: "GUCCI SPORTS RUNNING SHOES FOR MEN",
       p: "2025 LIMITED EDITION",
       text_color: "text-white",
     },
   ];
 
-  useEffect(() => {
-    $(".main-section").owlCarousel({
-      loop: true,
-      margin: 0,
-      nav: false,
-      dots: false,
-      autoplay: true,
-      autoplayHoverPause: true,
-      autoplaySpeed: 700,
-      responsive: {
-        0: {
-          items: 1,
-        },
-      },
-    });
-  }, []);
+  const handlePrev = () => {
+    carouselRef.current?.prev();
+  };
+
+  const handleNext = () => {
+    carouselRef.current?.next();
+  };
 
   return (
     <div
-      onMouseEnter={() => setButtondisplay(true)}
-      onMouseLeave={() => setButtondisplay(false)}
+      onMouseEnter={() => setButtonDisplay(true)}
+      onMouseLeave={() => setButtonDisplay(false)}
       className="parent group relative w-full h-fit"
     >
-      {/* items  */}
-      <div className="owl-carousel main-section owl-theme w-full flex justify-center items-center">
+      {/* Carousel */}
+      <OwlCarousel
+        ref={carouselRef}
+        className="owl-theme w-full flex justify-center items-center"
+        loop
+        margin={0}
+        nav={false}
+        dots={false}
+        autoplay
+        autoplayHoverPause
+        autoplaySpeed={700}
+        items={1}
+      >
         {imgArr.map((obj, index) => (
           <div
             key={index}
@@ -54,10 +58,12 @@ const MainSlider = () => {
             <img
               src={obj.src}
               className="absolute h-full w-full object-cover object-[40%]"
-              alt=""
+              alt="Slider Image"
+              loading="lazy"
+              decoding="async"
             />
 
-            {/* content  */}
+            {/* Content */}
             <div
               className={`content ${obj.text_color} w-fit my-auto sm:mr-5 h-fit z-20 flex flex-col gap-2 sm:gap-3 md:gap-5 lg:gap-7 justify-between ml-[40%] sm:ml-[50%] md:ml-[50%] xl:ml-[55%]`}
             >
@@ -77,19 +83,18 @@ const MainSlider = () => {
             </div>
           </div>
         ))}
-      </div>
+      </OwlCarousel>
 
-      {/* buttons */}
+      {/* Buttons */}
       <button
-        onClick={() => $(".main-section").trigger("prev.owl.carousel")}
-        className={`opacity-0 group-hover:lg:opacity-100 absolute top-[40%] left-5 z-10 p-5 rounded-full bg-white text-black text-lg group-hover:lg:cursor-pointer hover:bg-Red hover:text-white transition duration-250 ease-in-out`}
+        onClick={handlePrev}
+        className="opacity-0 group-hover:lg:opacity-100 absolute top-[40%] left-5 z-10 p-5 rounded-full bg-white text-black text-lg group-hover:lg:cursor-pointer hover:bg-Red hover:text-white transition duration-250 ease-in-out"
       >
         <FaArrowLeft />
       </button>
-
       <button
-        onClick={() => $(".main-section").trigger("next.owl.carousel")}
-        className={`opacity-0 group-hover:lg:opacity-100 absolute top-[40%] right-5 z-10 p-5 rounded-full bg-white text-black text-lg group-hover:lg:cursor-pointer hover:bg-Red hover:text-white transition duration-250 ease-in-out`}
+        onClick={handleNext}
+        className="opacity-0 group-hover:lg:opacity-100 absolute top-[40%] right-5 z-10 p-5 rounded-full bg-white text-black text-lg group-hover:lg:cursor-pointer hover:bg-Red hover:text-white transition duration-250 ease-in-out"
       >
         <FaArrowRight />
       </button>

@@ -7,11 +7,11 @@ const UserDiv = ({ value }) => {
   const dispatch = useDispatch();
   const { allUsers } = useSelector((state) => state.userSlice);
   const [User, setUser] = useState();
-  
+
   useEffect(() => {
     dispatch(getAllUsersThunk());
   }, [dispatch]);
-  
+
   useEffect(() => {
     if (value) {
       setUser(
@@ -69,6 +69,8 @@ const UserDiv = ({ value }) => {
                   <td>{index + 1}</td>
                   <td className="flex justify-start items-center gap-3 h-full mr-5">
                     <img
+                      loading="lazy"
+                      decoding="async"
                       className="w-9 h-9 rounded-full"
                       src="/ProfilePhoto.jpeg"
                       alt="Rounded avatar"

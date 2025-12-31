@@ -79,6 +79,8 @@ const BlogsDiv = ({ value }) => {
                     <td className="flex justify-start h-full items-center gap-3">
                       {" "}
                       <img
+                        loading="lazy"
+                        decoding="async"
                         className="w-12 h-12"
                         src={blog.blogImage}
                         alt="Rounded avatar"

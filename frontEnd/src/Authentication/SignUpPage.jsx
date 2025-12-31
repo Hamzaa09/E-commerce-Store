@@ -276,6 +276,8 @@ const Login = () => {
                 className="flex gap-2 justify-center items-center border border-GrayLight p-2 rounded-2xl hover:bg-WhiteLight active:translate-y-1 hover:cursor-pointer"
               >
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src="/buttons/google.png"
                   alt="google"
                   className="h-[20px]"
@@ -286,6 +288,8 @@ const Login = () => {
               {/* facebook  */}
               <div className="flex gap-2 justify-center items-center border border-GrayLight p-2 rounded-2xl hover:bg-WhiteLight active:translate-y-1 hover:cursor-pointer">
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src="/buttons/facebook.jpg"
                   alt="facebook"
                   className="h-[20px]"

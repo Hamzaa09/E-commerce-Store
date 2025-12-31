@@ -155,6 +155,7 @@ const BlogsManagement = () => {
                         src={URL.createObjectURL(file)}
                         alt="product"
                         className="h-full w-full rounded-xl"
+                        loading="lazy" decoding="async"
                       />
                       <IoIosClose
                         className="absolute hover:bg-GrayLight rounded-full top-1 right-1"

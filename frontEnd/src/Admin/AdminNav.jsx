@@ -14,7 +14,7 @@ const AdminNav = () => {
       setNavShad(window.scrollY > 1);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       removeEventListener("scroll", handleScroll);
@@ -30,7 +30,7 @@ const AdminNav = () => {
 
     handleResize();
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize, { passive: true });
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -59,7 +59,10 @@ const AdminNav = () => {
       >
         {/* close button  */}
         <div className="flex gap-2 items-center">
-          <div onClick={() => setNav(!nav)} className="border border-GrayLight rounded-sm p-2 hover:cursor-pointer hover:bg-WhiteLight">
+          <div
+            onClick={() => setNav(!nav)}
+            className="border border-GrayLight rounded-sm p-2 hover:cursor-pointer hover:bg-WhiteLight"
+          >
             <HiBars3 />
           </div>
           <div className="border border-GrayLight rounded-sm hover:cursor-pointer hover:bg-WhiteLight hidden md:flex items-center px-2">
@@ -80,7 +83,12 @@ const AdminNav = () => {
           <div className="flex justify-center items-center gap-5 transition-all duration-100 ease-in-out w-fit">
             <div className="logo flex justify-center items-center md:h-[5vh] md:w-[140px] lg:w-[130px] h-fit w-[25vw] sm:w-[22vw]">
               <Link to="/">
-                <img src="/Logo.jpg" alt="logo" />
+                <img
+                  src="/Logo.jpg"
+                  alt="logo"
+                  loading="lazy"
+                  decoding="async"
+                />
               </Link>
             </div>
           </div>
@@ -92,6 +100,8 @@ const AdminNav = () => {
             className="w-10 h-10 rounded-full"
             src="/ProfilePhoto.jpeg"
             alt="Rounded avatar"
+            loading="lazy"
+            decoding="async"
           />
           <p className="truncate w-0 md:w-fit">Muhammad Hamza</p>
         </div>

@@ -47,7 +47,7 @@ const Navbar = (props) => {
       setNavShad(window.scrollY > 100);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       removeEventListener("scroll", handleScroll);

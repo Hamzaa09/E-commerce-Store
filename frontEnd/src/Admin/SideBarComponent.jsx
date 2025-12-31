@@ -22,7 +22,7 @@ const SideBarComponent = (props) => {
 
     handleResize();
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize, { passive: true });
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -54,7 +54,12 @@ const SideBarComponent = (props) => {
           <div className="flex justify-center items-center gap-5 transition-all duration-100 ease-in-out w-fit">
             <div className="logo flex justify-center items-center md:h-[5vh] md:w-[140px] lg:w-[130px] h-fit w-[25vw] sm:w-[22vw]">
               <Link to="/">
-                <img src="/Logo.jpg" alt="logo" />
+                <img
+                  src="/Logo.jpg"
+                  alt="logo"
+                  loading="lazy"
+                  decoding="async"
+                />
               </Link>
             </div>
           </div>
@@ -122,7 +127,9 @@ const SideBarComponent = (props) => {
           </Link>
           <Link
             className={`flex gap-2 items-center ${
-              props.value === "blogsManagement" ? "bg-WhiteLight shadow-sm/10" : ""
+              props.value === "blogsManagement"
+                ? "bg-WhiteLight shadow-sm/10"
+                : ""
             }`}
             to="/admin/blogsManagement"
           >

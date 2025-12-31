@@ -9,7 +9,7 @@ const DealsSkeleton = () => {
         <div className="mx-auto h-4 w-24 bg-gray-200 rounded"></div>
 
         {/* Product Name */}
-        <div className="mx-auto h-5 w-40 bg-gray-200 rounded"></div>
+        <div className="mx-auto h-5 w-30 md:w-40 bg-gray-200 rounded"></div>
 
         {/* Rating */}
         <div className="flex justify-center gap-1 my-3">

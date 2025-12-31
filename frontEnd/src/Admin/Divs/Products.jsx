@@ -75,6 +75,8 @@ const Products = ({ value }) => {
                       className="w-12 h-12 rounded-full"
                       src="/products/p1.jpg"
                       alt="Rounded avatar"
+                      loading="lazy"
+                      decoding="async"
                     />
                     <p>{product.productName}</p>
                   </td>

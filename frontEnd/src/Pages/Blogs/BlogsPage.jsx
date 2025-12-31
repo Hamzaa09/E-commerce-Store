@@ -34,7 +34,7 @@ const BlogsPage = () => {
             <BlogSkeleton />
           </div>
         ) : (
-          allblogs.map((blog, index) => (
+          allblogs?.map((blog, index) => (
             <div
               key={index}
               className="md:w-[calc(50%-0.375rem)] xl:w-[calc(33%-0.375rem)] group h-[35vh] lg:h-[45vh] w-full flex flex-col gap-2 justify-around"

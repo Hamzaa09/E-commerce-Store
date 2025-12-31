@@ -154,6 +154,7 @@ const ProductsManagementPage = () => {
                       className="min-w-[100px] max-w-[100px] h-[100px] bg-GrayLight flex justify-center items-center text-2xl rounded-xl cursor-pointer relative active:translate-y-1 transition-all duration-300 ease-in-out"
                     >
                       <img
+                      loading="lazy" decoding="async"
                         key={index}
                         src={URL.createObjectURL(file)}
                         alt="product"

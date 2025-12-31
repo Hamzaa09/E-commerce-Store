@@ -99,16 +99,17 @@
 // };
 
 // export default ReactOwlCarousel;
-
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {OwlCarousel} from "react-owl-carousel";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import "swiper/css";
 
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
-
-const ReactReactOwlCarouselSection = () => {
+const OwlCarouse = () => {
   const navigate = useNavigate();
+  const [buttonDisplay, setButtonDisplay] = useState(false);
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
 
   const imagesArray = [
     "Logo-1.jpeg",
@@ -125,56 +126,39 @@ const ReactReactOwlCarouselSection = () => {
     { src: "promo-2.jpeg", h2: "Sprinter 2 Alt Sneakers", p: "SHOP NOW" },
   ];
 
-  const brandOptions = {
-    loop: true,
-    margin: 0,
-    nav: false,
-    dots: false,
-    autoplay: true,
-    autoplayHoverPause: true,
-    autoplayTimeout: 2000,
-    responsive: {
-      0: { items: 1 },
-      400: { items: 2 },
-      600: { items: 3 },
-      1000: { items: 4 },
-      1400: { items: 5 },
-    },
-  };
-
-  const promoOptions = {
-    loop: false,
-    margin: 15,
-    nav: false,
-    dots: false,
-    responsive: {
-      0: { items: 1 },
-      768: { items: 2 },
-      1024: { items: 3 },
-    },
-  };
-
   return (
     <>
       {/* Brand Logos Carousel */}
-   <OwlCarousel
+      <Swiper
+        modules={[Navigation, Autoplay]}
+        loop
+        autoplay={{ delay: 2000, disableOnInteraction: false }}
+        slidesPerView={1}
+        breakpoints={{
+          0: { slidesPerView: 1 },
+          400: { slidesPerView: 2 },
+          600: { slidesPerView: 3 },
+          1000: { slidesPerView: 4 },
+          1400: { slidesPerView: 5 },
+        }}
         className="owl-theme mt-10 md:mt-15 px-5 md:px-10 xl:mt-20 xl:px-20"
-        {...brandOptions}
       >
         {imagesArray.map((image, index) => (
-          <div key={index} className="item flex justify-center items-center">
-            <img
-              src={`/logos/${image}`}
-              alt={`Brand ${index + 1}`}
-              loading="lazy"
-              decoding="async"
-              className="object-contain max-h-[7vh] md:max-h-[9vh] lg:max-h-[10vh]"
-            />
-          </div>
+          <SwiperSlide key={index}>
+            <div className="item flex justify-center items-center">
+              <img
+                src={`/logos/${image}`}
+                alt={`Brand ${index + 1}`}
+                loading="lazy"
+                decoding="async"
+                className="object-contain max-h-[7vh] md:max-h-[9vh] lg:max-h-[10vh]"
+              />
+            </div>
+          </SwiperSlide>
         ))}
-      </OwlCarousel>
+      </Swiper>
 
-      {/* posters */}
+      {/* Promotion Posters */}
       <div className="mx-5 mt-10 md:mt-15 md:mx-10 lg:mt-20 lg:mx-20 tracking-wide overflow-x-scroll lg:overflow-hidden">
         <div className="flex justify-between gap-3 md:gap-5 w-180 md:w-250 lg:w-full">
           {promoArray.map((promo, index) => (
@@ -208,4 +192,4 @@ const ReactReactOwlCarouselSection = () => {
   );
 };
 
-export default ReactReactOwlCarouselSection;
+export default OwlCarouse;

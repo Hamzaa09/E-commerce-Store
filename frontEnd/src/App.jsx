@@ -28,9 +28,9 @@ import BlogsManagement from "./Admin/BlogsManagement";
 import SuccessPage from "./Pages/SuccessPage";
 import CancelPage from "./Pages/CancelPage";
 import Policies from "./Pages/Footer/Policies";
-import { getAllUsersCountThunk, getUserThunk } from "../store/users/user.thunk";
-import { getAllOrdersCountThunk } from "../store/orders/order.thunk";
+import { getUserThunk } from "../store/users/user.thunk";
 import { getAllProductThunk } from "../store/products/product.thunk";
+ 
 
 function App() {
   const dispatch = useDispatch();

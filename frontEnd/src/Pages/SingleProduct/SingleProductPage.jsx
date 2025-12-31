@@ -3,27 +3,32 @@ import TagLine from "../Landing/Components/TagLine";
 import Footer from "../Landing/Components/Footer";
 import ScrollToTopButton from "../Landing/Components/ScrollToTopButton";
 import NewsLetter from "../Landing/Components/NewsLetter";
+import BreadCrum from "../Landing/Components/BreadCrum";
+import ProductsSection from "../Landing/Components/ProductsSection";
+import SingleProductSkeleton from "../../Skeletons/SingleProdSkeleton";
+
 import { useEffect, useRef, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { FaAngleLeft, FaAngleRight, FaStar } from "react-icons/fa";
-import BreadCrum from "../Landing/Components/BreadCrum";
+import { TbFileDescription } from "react-icons/tb";
+import { FiTruck } from "react-icons/fi";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCartProductsThunk,
   getSingleProductThunk,
   updateReviewThunk,
 } from "../../../store/products/product.thunk";
-import { useParams } from "react-router-dom";
-import { ClipLoader } from "react-spinners";
-import { TbFileDescription } from "react-icons/tb";
-import { FiTruck } from "react-icons/fi";
 import { addToCartThunk, getCartThunk } from "../../../store/users/user.thunk";
-import toast from "react-hot-toast";
-import { loadStripe } from "@stripe/stripe-js";
 import { getPaymentThunk } from "../../../store/payment/payment.thunk";
-import ProductsSection from "../Landing/Components/ProductsSection";
-import SingleProductSkeleton from "../../Skeletons/SingleProdSkeleton";
-import {OwlCarousel} from "react-owl-carousel";
+
+import { useParams } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
+import toast from "react-hot-toast";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
 
 const SingleProductPage = () => {
   const { id } = useParams();
@@ -35,7 +40,8 @@ const SingleProductPage = () => {
   const [image, setImage] = useState();
   const [val, setVal] = useState();
   const [hover, setHover] = useState(null);
-  const carouselRef = useRef(null);
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
   const { cart, userProfile } = useSelector((state) => state.userSlice);
 
   useEffect(() => {
@@ -43,13 +49,11 @@ const SingleProductPage = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (cart) {
-      dispatch(getCartProductsThunk(cart));
-    }
+    if (cart) dispatch(getCartProductsThunk(cart));
   }, [cart, dispatch]);
 
   useEffect(() => {
-    window.scrollTo({ top: true, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
     if (id) dispatch(getSingleProductThunk({ id }));
   }, [id, dispatch]);
 
@@ -61,124 +65,104 @@ const SingleProductPage = () => {
   }, [val]);
 
   useEffect(() => {
-    if (singleProd) {
-      setImage(singleProd?.productImages?.[0]);
-    }
+    if (singleProd) setImage(singleProd?.productImages?.[0]);
   }, [singleProd]);
 
   const handleClick = async (pid) => {
     if (!userProfile) return toast.error("Login Required!");
-
     const response = await dispatch(addToCartThunk({ productId: pid }));
-
     if (response?.payload?.success) {
       dispatch(getCartThunk());
       return toast.success("Added to Cart!");
     }
-
-    toast.error("Reponse Error!");
+    toast.error("Response Error!");
   };
 
   const handleBuy = async () => {
     if (!userProfile) return toast.error("Login Required!");
-    const stripe = await loadStripe(
-      import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
-    );
-    const response = await dispatch(
-      getPaymentThunk({ orders: [singleProd], quantity: [value] })
-    );
-
-    const result = stripe.redirectToCheckout({
-      sessionId: response.payload.id,
-    });
+    const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+    const response = await dispatch(getPaymentThunk({ orders: [singleProd], quantity: [value] }));
+    stripe.redirectToCheckout({ sessionId: response.payload.id });
   };
 
-  const handlePrev = () => {
-    carouselRef.current?.prev();
-  };
-
-  const handleNext = () => {
-    carouselRef.current?.next();
-  };
   return (
     <>
       <ScrollToTopButton />
       <TagLine />
       <Navbar value="" />
-
       {singleProd && <BreadCrum value={singleProd?.productName} />}
 
-      {/* main div  */}
+      {/* Main container */}
       <div className="mb-20 w-full h-full flex flex-col md:flex-row md:justify-around md:gap-4 px-5 mt-5 md:px-10 lg:mt-10 2xl:w-[1500px] 2xl:mx-auto">
         {singleProd ? (
           <>
-            {/* images  */}
-            <div className="md:sticky md:self-start  md:top-0 md:w-1/2 flex flex-col justify-center items-center">
+            {/* Images & Thumbnails */}
+            <div className="md:sticky md:self-start md:top-0 md:w-1/2 flex flex-col justify-center items-center">
               <div className="w-[60%] md:w-[80%] flex justify-center items-center">
-                <img
-                  src={image}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
+                <img src={image} alt="" className="w-full h-full object-cover" />
               </div>
 
               <div className="w-[80%] h-fit md:w-full relative mb-3">
-             <OwlCarousel
-                  key={image} // forces re-render when selection changes
-                  ref={carouselRef}
-                  className="owl-theme"
+                {/* Swiper Thumbnails */}
+                <Swiper
+                  key={image} // force re-render when selection changes
+                  modules={[Navigation]}
                   loop
-                  margin={15}
-                  nav={false}
-                  dots={false}
-                  responsive={{
-                    0: { items: 1 },
-                    300: { items: 2 },
-                    600: { items: 3 },
-                    1000: { items: 4 },
+                  speed={500}
+                  slidesPerView={1}
+                  spaceBetween={15}
+                  breakpoints={{
+                    300: { slidesPerView: 2 },
+                    600: { slidesPerView: 3 },
+                    1000: { slidesPerView: 4 },
                   }}
+                  navigation={{
+                    prevEl: prevRef.current,
+                    nextEl: nextRef.current,
+                  }}
+                  onBeforeInit={(swiper) => {
+                    swiper.params.navigation.prevEl = prevRef.current;
+                    swiper.params.navigation.nextEl = nextRef.current;
+                  }}
+                  className="main-slider"
                 >
                   {singleProd?.productImages?.map((img, index) => (
-                    <div
-                      key={index}
-                      className="item h-fit w-fit md:w-full flex flex-col gap-1 justify-around"
-                    >
-                      <div
-                        onClick={() => setImage(img)}
-                        className={`${
-                          img === image ? "border border-Gray" : ""
-                        } cursor-pointer`}
-                      >
-                        <img
-                          src={img}
-                          alt={`thumbnail-${index}`}
-                          className="w-full h-[8em] md:h-full object-cover transition-opacity duration-500 ease-in-out"
-                        />
+                    <SwiperSlide key={index}>
+                      <div className="item h-fit w-fit md:w-full flex flex-col gap-1 justify-around">
+                        <div
+                          onClick={() => setImage(img)}
+                          className={`${img === image ? "border border-Gray" : ""} cursor-pointer`}
+                        >
+                          <img
+                            src={img}
+                            alt={`thumbnail-${index}`}
+                            className="w-full h-[8em] md:h-full object-cover transition-opacity duration-500 ease-in-out"
+                          />
+                        </div>
                       </div>
-                    </div>
+                    </SwiperSlide>
                   ))}
-                </OwlCarousel>
+                </Swiper>
 
-                {/* buttons */}
+                {/* Custom buttons */}
                 <button
-                  onClick={handlePrev}
-                  className={`absolute h-full top-0 left-0 z-10 text-black text-xl cursor-pointer`}
+                  ref={prevRef}
+                  className="absolute h-full top-0 left-0 z-10 text-black text-xl cursor-pointer"
                 >
                   <FaAngleLeft />
                 </button>
-
                 <button
-                  onClick={handleNext}
-                  className={`absolute h-full top-0 right-0 z-10 text-black text-xl hover:cursor-pointer`}
+                  ref={nextRef}
+                  className="absolute h-full top-0 right-0 z-10 text-black text-xl cursor-pointer"
                 >
                   <FaAngleRight />
                 </button>
               </div>
             </div>
 
-            {/* text  */}
+            {/* Product Details */}
             <div className="md:w-1/2 mt-10 flex flex-col gap-4 w-full ml-5">
-              {/* div 1 */}
+              {/* Title, Price, Rating */}
               <div className="flex flex-col gap-3 border border-transparent border-b-GrayLight pb-5">
                 <h1 className="text-start font-bold tracking-wide text-2xl md:text-3xl">
                   {singleProd?.productName}
@@ -186,7 +170,7 @@ const SingleProductPage = () => {
 
                 <div className="flex gap-3 justify-start items-center">
                   {singleProd?.productDiscount && (
-                    <h6 className="text-left font-normal tracking-wide text-lg text-Gray line-through ">
+                    <h6 className="text-left font-normal tracking-wide text-lg text-Gray line-through">
                       ${singleProd?.productPrice.toFixed(2)}
                     </h6>
                   )}
@@ -195,13 +179,10 @@ const SingleProductPage = () => {
                     {singleProd?.productDiscount
                       ? (
                           Number(singleProd?.productPrice) -
-                          (Number(singleProd?.productPrice) *
-                            singleProd?.productDiscount) /
-                            100
+                          (Number(singleProd?.productPrice) * singleProd?.productDiscount) / 100
                         ).toFixed(2)
                       : singleProd?.productPrice.toFixed(2)}
                   </h6>
-
                   {singleProd?.productDiscount && (
                     <span className="p-1 px-3 w-fit h-fit bg-[#c5172e] text-white flex justify-center items-center text-sm font-medium">
                       -{singleProd?.productDiscount}%
@@ -216,15 +197,12 @@ const SingleProductPage = () => {
                 <div className="flex gap-2 text-2xl">
                   {[...Array(5)].map((_, i) => {
                     const starValue = i + 1;
-                    const id = singleProd?._id;
                     return (
                       <FaStar
                         key={i}
                         onMouseEnter={() => setHover(starValue)}
                         onMouseLeave={() => null}
-                        onClick={() => {
-                          setVal(starValue);
-                        }}
+                        onClick={() => setVal(starValue)}
                         className={`cursor-pointer ${
                           starValue <= (hover || singleProd?.productRating)
                             ? "text-yellow-500"
@@ -236,25 +214,19 @@ const SingleProductPage = () => {
                 </div>
               </div>
 
-              {/* div 2 */}
+              {/* Quantity & Buttons */}
               <div className="flex flex-col gap-3 tracking-wide">
                 <div className="flex gap-2">
-                  <p className="flex items-center text-lg font-semibold">
-                    Availability:
-                  </p>
+                  <p className="flex items-center text-lg font-semibold">Availability:</p>
                   <div className="flex items-center text-lg font-medium text-black">
                     <div
                       className={`${
-                        singleProd?.productStock
-                          ? "border-green-500"
-                          : "border-red-500"
-                      } p-[2px] rounded-full border-1  flex justify-center items-center mr-1`}
+                        singleProd?.productStock ? "border-green-500" : "border-red-500"
+                      } p-[2px] rounded-full border-1 flex justify-center items-center mr-1`}
                     >
                       <div
-                        className={` ${
-                          singleProd?.productStock
-                            ? "bg-green-500"
-                            : "bg-red-500"
+                        className={`${
+                          singleProd?.productStock ? "bg-green-500" : "bg-red-500"
                         } h-2 w-2 rounded-full`}
                       />
                     </div>
@@ -269,9 +241,7 @@ const SingleProductPage = () => {
 
                   <div className="flex gap-2 items-center justify-around mt-3 w-fit">
                     <div className="py-2 w-[8rem] border-1 border-GrayLight hover:cursor-point flex justify-around items-center text-xl text-Gray [&>button]:hover:cursor-pointer">
-                      <button onClick={() => setValue(Math.max(1, value - 1))}>
-                        -
-                      </button>
+                      <button onClick={() => setValue(Math.max(1, value - 1))}>-</button>
                       <p className="text-lg">{value}</p>
                       <button onClick={() => setValue(value + 1)}>+</button>
                     </div>
@@ -303,28 +273,21 @@ const SingleProductPage = () => {
                 </button>
               </div>
 
-              {/* div 3  */}
+              {/* Brand & Category */}
               <div className="flex flex-col gap-1 tracking-wide">
                 <div className="flex gap-2">
-                  <p className="flex items-center text-lg font-semibold">{`Brand:`}</p>
-                  <p className="flex items-center text-lg">
-                    {" "}
-                    {singleProd?.productBrand}
-                  </p>
+                  <p className="flex items-center text-lg font-semibold">Brand:</p>
+                  <p className="flex items-center text-lg">{singleProd?.productBrand}</p>
                 </div>
                 <div className="flex gap-2">
-                  <p className="flex items-center text-lg font-semibold">
-                    Category:
-                  </p>
-                  <p className="flex items-center text-lg">
-                    {singleProd?.productCategory}
-                  </p>
+                  <p className="flex items-center text-lg font-semibold">Category:</p>
+                  <p className="flex items-center text-lg">{singleProd?.productCategory}</p>
                 </div>
               </div>
 
-              {/* div 4 */}
+              {/* Details & Shipping */}
               <div className="flex flex-col gap-1 mr-5 md:mr-0">
-                {/* description  */}
+                {/* Details */}
                 <div className="flex flex-col gap-3 tracking-wide">
                   <div
                     onClick={() => setF1(!f1)}
@@ -334,22 +297,12 @@ const SingleProductPage = () => {
                       <TbFileDescription className="text-xl" />
                       Details
                     </h4>
-                    {!f1 && (
-                      <IoIosArrowDown className="mt-1 text-shadow-lg tracking-wider" />
-                    )}
-                    {f1 && (
-                      <IoIosArrowUp className="mt-1 text-shadow-lg tracking-wider" />
-                    )}
+                    {!f1 ? <IoIosArrowDown className="mt-1" /> : <IoIosArrowUp className="mt-1" />}
                   </div>
-
-                  {f1 && (
-                    <p className="text-Gray font-medium px-3">
-                      {singleProd?.productDescription}
-                    </p>
-                  )}
+                  {f1 && <p className="text-Gray font-medium px-3">{singleProd?.productDescription}</p>}
                 </div>
 
-                {/* shipping and return  */}
+                {/* Shipping & Returns */}
                 <div className="flex flex-col gap-3 tracking-wide">
                   <div
                     onClick={() => setF2(!f2)}
@@ -359,18 +312,12 @@ const SingleProductPage = () => {
                       <FiTruck className="text-xl" />
                       Shipping & Returns
                     </h4>
-                    {!f2 && (
-                      <IoIosArrowDown className="mt-1 text-shadow-lg tracking-wider" />
-                    )}
-                    {f2 && (
-                      <IoIosArrowUp className="mt-1 text-shadow-lg tracking-wider" />
-                    )}
+                    {!f2 ? <IoIosArrowDown className="mt-1" /> : <IoIosArrowUp className="mt-1" />}
                   </div>
-
                   {f2 && (
                     <p className="text-Gray font-medium px-3">
                       Free shipping and returns available on all orders! We ship
-                      all US domestic orders within 5-10 business days
+                      all US domestic orders within 5-10 business days.
                     </p>
                   )}
                 </div>
@@ -382,60 +329,7 @@ const SingleProductPage = () => {
         )}
       </div>
 
-      {/* Description heading  */}
-      {/* <div className="mainHeading flex flex-col justify-center items-center mb-5 tracking-wide px-5 mt-5 md:px-10 lg:mt-10 2xl:w-[1500px] 2xl:mx-auto border border-transparent border-b-GrayLight">
-        <h1 className="py-3 text-center text-2xl font-bold">Description:</h1>
-        <span className="bg-Red text-center w-[100px] lg:w-[7%] h-1"></span>
-      </div> */}
-
-      {/* Description  */}
-      {/* <div className="mainHeading flex flex-col justify-start items-start tracking-wide mb-10 px-5 md:px-10 2xl:w-[1500px] 2xl:mx-auto [&>p]:text-Gray [&>p]:font-medium [&>p]:mb-3 [&>h3]:py-3 [&>h3]:text-start [&>h3]:text-lg [&>h3]:font-bold">
-        <h1 className="py-3 text-start text-3xl font-bold">About This Item</h1>
-        <p className="pb-5">
-          Asian Shoes for regular comfort. The body of shoes is designed with
-          colorful soft material describing to improve the overall look of the
-          shoes. The upper material keeps air circulation while moderated ankles
-          takes full care of your feet when you go out for running. Perfect to
-          rev up your sporty spirit, this trendy pair of Sports shoes from the
-          house of Power Provides excellent durability and ensures sturdy grip.
-          Designed to keep feet relaxed with a soft and comfortable fit, this
-          stylish yet functional pair ensures flexibility and freedom of
-          movement with responsive cushioning and enhanced lightweight feel.
-        </p>
-
-        <h3 className="">Lightweight & Breathable :</h3>
-        <p className="">
-          Exclusive design and durable materials every step feels light and
-          breezy. Breathable, free-moving fabrics which adjust according to your
-          foot and creates an astoundingly easy-going experience.
-        </p>
-
-        <h3 className="">Non Slip & Shockproof :</h3>
-        <p className="">
-          Great engineering strikes a balance in style, made in the potent
-          design and latest fashion trends. Made for long-term wear, with extra
-          emphasis on providing cushion to the feet, removing heel strain.
-        </p>
-
-        <h3 className="">Comfort Sole & Flexible Walk :</h3>
-        <p className="">
-          The outsoles are made by an air cushion, doubling the effect of shock
-          absorption. Besides, these shoes perform excellent in durability and
-          are also slip resistant. It provides push cushioning comfort for foot
-          pain relief and helps relieve pressure while conforming to your every
-          step.
-        </p>
-        <p className="">
-          Shoes brings to you this pair of running shoes which look attractive
-          and stylish. They have been designed for women who need a pair of
-          comfortable footwear for their day trips. The shoes are made from Mesh
-          as upper material and EVA & TPR as sole material and is available in
-          different shades.
-        </p>
-      </div> */}
-
       <ProductsSection />
-
       <NewsLetter />
       <Footer />
     </>

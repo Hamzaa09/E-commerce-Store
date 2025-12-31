@@ -54,7 +54,23 @@ const ProductsSection = () => {
         </div>
       ) : (
         <div className="relative">
-          {halfAllProducts?.map((product) => (
+          {halfAllProducts?.length > 0 && (
+            <OwlCarousel
+              key={halfAllProducts.length}
+              ref={carouselRef}
+              className="owl-theme"
+              loop
+              margin={15}
+              nav={false}
+              dots={false}
+              responsive={{
+                0: { items: 1 },
+                300: { items: 2 },
+                600: { items: 3 },
+                1000: { items: 4 },
+              }}
+            >
+              {halfAllProducts?.map((product) => (
                 <Link
                   onClick={handleClick}
                   to={`/singleProduct/${product._id}`}
@@ -131,11 +147,13 @@ const ProductsSection = () => {
                   </div>
                 </Link>
               ))}
+            </OwlCarousel>
+          )}
         </div>
       )}
 
       {/* Buttons */}
-      <button
+      {/* <button
         onClick={handlePrev}
         className={`${
           buttonDisplay ? "visible" : "hidden"
@@ -151,7 +169,7 @@ const ProductsSection = () => {
         } absolute top-[45%] right-2 md:right-5 lg:right-10 z-10 p-3 md:p-4 lg:p-5 rounded-full drop-shadow-md bg-white text-black md:text-md lg:text-lg text-sm hover:cursor-pointer transition duration-250 ease-in-out`}
       >
         <FaArrowRight />
-      </button>
+      </button> */}
     </div>
   );
 };

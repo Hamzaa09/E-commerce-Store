@@ -40,68 +40,70 @@ const LatestBlogs = () => {
         <span className="text-center bg-Red w-[140px] lg:w-[10%] h-1"></span>
       </div>
       {/* Carousel */}
-      <div className="relative">
-        {blogLoading ? (
-          <div className="flex w-full justify-start gap-2 overflow-x-hidden">
-            <div className="bigSm:w-1/2 lg:w-1/3 w-full block">
-              <BlogSkeleton />
-            </div>
-
-            <div className="hidden bigSm:w-1/2 lg:w-1/3  bigSm:block pl-4 lg:px-4">
-              <BlogSkeleton />
-            </div>
-
-            <div className="hidden bigSm:w-1/2 lg:w-1/3  lg:block">
-              <BlogSkeleton />
-            </div>
+      {blogLoading ? (
+        <div className="flex w-full justify-start gap-2 overflow-x-hidden">
+          <div className="bigSm:w-1/2 lg:w-1/3 w-full block">
+            <BlogSkeleton />
           </div>
-        ) : (
-          <OwlCarousel
-            ref={carouselRef}
-            className="owl-theme"
-            loop
-            margin={10}
-            nav={false}
-            dots={false}
-            responsive={{
-              0: { items: 1 },
-              600: { items: 2 },
-              1024: { items: 3 },
-            }}
-          >
-            {allblogs?.map((blog, index) => (
-              <Link
-                key={index}
-                to="/blogs"
-                className="item group h-[45vh] md:h-[55vh] w-full flex flex-col gap-2 justify-around"
-              >
-                <div className="relative group h-[60%] mb-2 flex justify-center items-center overflow-hidden">
-                  <img
-                    src={blog.blogImage}
-                    className="h-full w-full group-hover:scale-105 transition-all duration-1000 ease-in-out object-cover"
-                    alt="blog-img"
-                  />
-                </div>
 
-                <div className="h-[40%]">
-                  <p className="text-Red font-bold text-md">
-                    {blog.blogDate.split("T", 1)[0]}
-                  </p>
-                  <h3 className="text-md md:text-xl md:py-1 font-medium group-hover:text-Red truncate">
-                    {blog.blogTitle}
-                  </h3>
-                  <h4 className="text-md md:text-xl text-Gray line-clamp-2">
-                    {blog.blogContent}
-                  </h4>
-                  <p className="text-Red font-bold text-md underline hover:no-underline mt-1">
-                    READ MORE
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </OwlCarousel>
-        )}
-      </div>
+          <div className="hidden bigSm:w-1/2 lg:w-1/3  bigSm:block pl-4 lg:px-4">
+            <BlogSkeleton />
+          </div>
+
+          <div className="hidden bigSm:w-1/2 lg:w-1/3  lg:block">
+            <BlogSkeleton />
+          </div>
+        </div>
+      ) : (
+        <div className="relative">
+          {allblogs?.length > 0 && (
+            <OwlCarousel
+              ref={carouselRef}
+              className="owl-theme"
+              loop
+              margin={10}
+              nav={false}
+              dots={false}
+              responsive={{
+                0: { items: 1 },
+                600: { items: 2 },
+                1024: { items: 3 },
+              }}
+            >
+              {allblogs?.map((blog, index) => (
+                <Link
+                  key={index}
+                  to="/blogs"
+                  className="item group h-[45vh] md:h-[55vh] w-full flex flex-col gap-2 justify-around"
+                >
+                  <div className="relative group h-[60%] mb-2 flex justify-center items-center overflow-hidden">
+                    <img
+                      src={blog.blogImage}
+                      className="h-full w-full group-hover:scale-105 transition-all duration-1000 ease-in-out object-cover"
+                      alt="blog-img"
+                    />
+                  </div>
+
+                  <div className="h-[40%]">
+                    <p className="text-Red font-bold text-md">
+                      {blog.blogDate.split("T", 1)[0]}
+                    </p>
+                    <h3 className="text-md md:text-xl md:py-1 font-medium group-hover:text-Red truncate">
+                      {blog.blogTitle}
+                    </h3>
+                    <h4 className="text-md md:text-xl text-Gray line-clamp-2">
+                      {blog.blogContent}
+                    </h4>
+                    <p className="text-Red font-bold text-md underline hover:no-underline mt-1">
+                      READ MORE
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </OwlCarousel>
+          )}
+        </div>
+      )}
 
       {/* Custom Buttons */}
       <button

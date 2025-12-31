@@ -3,7 +3,7 @@ import TagLine from "../Landing/Components/TagLine";
 import Footer from "../Landing/Components/Footer";
 import ScrollToTopButton from "../Landing/Components/ScrollToTopButton";
 import NewsLetter from "../Landing/Components/NewsLetter";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { FaAngleLeft, FaAngleRight, FaStar } from "react-icons/fa";
 import BreadCrum from "../Landing/Components/BreadCrum";
@@ -23,6 +23,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { getPaymentThunk } from "../../../store/payment/payment.thunk";
 import ProductsSection from "../Landing/Components/ProductsSection";
 import SingleProductSkeleton from "../../Skeletons/SingleProdSkeleton";
+import ReactOwlCarousel from "react-owl-carousel";
 
 const SingleProductPage = () => {
   const { id } = useParams();
@@ -34,6 +35,7 @@ const SingleProductPage = () => {
   const [image, setImage] = useState();
   const [val, setVal] = useState();
   const [hover, setHover] = useState(null);
+  const carouselRef = useRef(null);
   const { cart, userProfile } = useSelector((state) => state.userSlice);
 
   useEffect(() => {
@@ -61,26 +63,6 @@ const SingleProductPage = () => {
   useEffect(() => {
     if (singleProd) {
       setImage(singleProd?.productImages?.[0]);
-      $(".singleProduct-section").owlCarousel({
-        loop: true,
-        margin: 10,
-        nav: false,
-        dots: false,
-        responsive: {
-          0: {
-            items: 1,
-          },
-          300: {
-            items: 2,
-          },
-          600: {
-            items: 3,
-          },
-          1000: {
-            items: 4,
-          },
-        },
-      });
     }
   }, [singleProd]);
 
@@ -110,6 +92,14 @@ const SingleProductPage = () => {
       sessionId: response.payload.id,
     });
   };
+
+  const handlePrev = () => {
+    carouselRef.current?.prev();
+  };
+
+  const handleNext = () => {
+    carouselRef.current?.next();
+  };
   return (
     <>
       <ScrollToTopButton />
@@ -133,44 +123,52 @@ const SingleProductPage = () => {
               </div>
 
               <div className="w-[80%] h-fit md:w-full relative mb-3">
-                <div className="owl-carousel singleProduct-section owl-theme flex justify-around hover:cursor-pointer px-5 relative">
+                <ReactOwlCarousel
+                  key={image} // forces re-render when selection changes
+                  ref={carouselRef}
+                  className="owl-theme"
+                  loop
+                  margin={15}
+                  nav={false}
+                  dots={false}
+                  responsive={{
+                    0: { items: 1 },
+                    300: { items: 2 },
+                    600: { items: 3 },
+                    1000: { items: 4 },
+                  }}
+                >
                   {singleProd?.productImages?.map((img, index) => (
                     <div
                       key={index}
                       className="item h-fit w-fit md:w-full flex flex-col gap-1 justify-around"
                     >
                       <div
-                        onClick={(e) => {
-                          setImage(img);
-                        }}
+                        onClick={() => setImage(img)}
                         className={`${
                           img === image ? "border border-Gray" : ""
-                        }`}
+                        } cursor-pointer`}
                       >
-                        {/* Normal Image */}
                         <img
                           src={img}
+                          alt={`thumbnail-${index}`}
                           className="w-full h-[8em] md:h-full object-cover transition-opacity duration-500 ease-in-out"
-                          alt="product"
                         />
                       </div>
                     </div>
                   ))}
-                </div>
+                </ReactOwlCarousel>
+
                 {/* buttons */}
                 <button
-                  onClick={() =>
-                    $(".singleProduct-section").trigger("prev.owl.carousel")
-                  }
+                  onClick={handlePrev}
                   className={`absolute h-full top-0 left-0 z-10 text-black text-xl cursor-pointer`}
                 >
                   <FaAngleLeft />
                 </button>
 
                 <button
-                  onClick={() =>
-                    $(".singleProduct-section").trigger("next.owl.carousel")
-                  }
+                  onClick={handleNext}
                   className={`absolute h-full top-0 right-0 z-10 text-black text-xl hover:cursor-pointer`}
                 >
                   <FaAngleRight />

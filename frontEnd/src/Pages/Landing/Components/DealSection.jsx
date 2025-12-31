@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDealsProductsThunk } from "../../../../store/products/product.thunk";
 import { Link } from "react-router-dom";
 import DealsSkeleton from "../../../Skeletons/DealsSkeleton";
-import OwlCarousel from "react-owl-carousel";
+import ReactOwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import CarousalSkeleton from "../../../Skeletons/CarousalSkeleton";
@@ -51,7 +51,7 @@ const DealSection = () => {
       ) : (
         <div className="relative">
           {dealsProducts?.length > 0 && (
-            <OwlCarousel
+            <ReactOwlCarousel
               ref={carouselRef}
               className="owl-theme"
               loop
@@ -141,7 +141,7 @@ const DealSection = () => {
                   </div>
                 </Link>
               ))}
-            </OwlCarousel>
+            </ReactOwlCarousel>
           )}
         </div>
       )}

@@ -5,7 +5,7 @@
 // import "owl.carousel/dist/assets/owl.theme.default.css";
 // import "owl.carousel";
 
-// const OwlCarousel = () => {
+// const ReactOwlCarousel = () => {
 //   const navigate = useNavigate();
 //   const imagesArray = [
 //     "Logo-1.png",
@@ -23,7 +23,7 @@
 //   ];
 
 //   useEffect(() => {
-//     $(".brand-names").owlCarousel({
+//     $(".brand-names").ReactOwlCarousel({
 //       loop: true,
 //       margin: 0,
 //       nav: false,
@@ -98,15 +98,15 @@
 //   );
 // };
 
-// export default OwlCarousel;
+// export default ReactOwlCarousel;
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import OwlCarousel from "react-owl-carousel";
+import ReactOwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 
-const ReactOwlCarouselSection = () => {
+const ReactReactOwlCarouselSection = () => {
   const navigate = useNavigate();
 
   const imagesArray = [
@@ -156,7 +156,7 @@ const ReactOwlCarouselSection = () => {
   return (
     <>
       {/* Brand Logos Carousel */}
-      <OwlCarousel
+      <ReactOwlCarousel
         className="owl-theme mt-10 md:mt-15 px-5 md:px-10 xl:mt-20 xl:px-20"
         {...brandOptions}
       >
@@ -171,7 +171,7 @@ const ReactOwlCarouselSection = () => {
             />
           </div>
         ))}
-      </OwlCarousel>
+      </ReactOwlCarousel>
 
       {/* posters */}
       <div className="mx-5 mt-10 md:mt-15 md:mx-10 lg:mt-20 lg:mx-20 tracking-wide overflow-x-scroll lg:overflow-hidden">
@@ -207,4 +207,4 @@ const ReactOwlCarouselSection = () => {
   );
 };
 
-export default ReactOwlCarouselSection;
+export default ReactReactOwlCarouselSection;

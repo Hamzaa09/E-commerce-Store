@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import OwlCarousel from "react-owl-carousel";
+import ReactOwlCarousel from "react-owl-carousel";
 
 const MainSlider = () => {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const MainSlider = () => {
       className="parent group relative w-full h-fit"
     >
       {/* Carousel */}
-      <OwlCarousel
+      <ReactOwlCarousel
         ref={carouselRef}
         className="owl-theme w-full flex justify-center items-center"
         loop
@@ -83,7 +83,7 @@ const MainSlider = () => {
             </div>
           </div>
         ))}
-      </OwlCarousel>
+      </ReactOwlCarousel>
 
       {/* Buttons */}
       <button

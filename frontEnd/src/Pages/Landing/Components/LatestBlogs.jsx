@@ -52,7 +52,7 @@ const LatestBlogs = () => {
             1000: { items: 3 },
           }}
         >
-          {allblogs?.length > 0 ? (
+          {allblogs?.length  > 0 ? (
             allblogs?.map((blog, index) => (
               <Link
                 key={index}

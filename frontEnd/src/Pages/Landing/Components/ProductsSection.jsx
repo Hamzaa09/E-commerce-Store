@@ -3,11 +3,11 @@ import { FaArrowLeft, FaArrowRight, FaStar } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProductsThunk } from "../../../../store/products/product.thunk";
 import { Link } from "react-router-dom";
-import DealsSkeleton from "../../../Skeletons/DealsSkeleton";
-import OwlCarousel from "react-owl-carousel";
+import ReactOwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import CarousalSkeleton from "../../../Skeletons/CarousalSkeleton";
+import ReactOwlCarousel from "react-owl-carousel";
 
 const ProductsSection = () => {
   const dispatch = useDispatch();
@@ -21,13 +21,13 @@ const ProductsSection = () => {
     dispatch(getAllProductsThunk({ prods: true }));
   }, [dispatch]);
 
-  // const handlePrev = () => {
-  //   carouselRef.current?.prev();
-  // };
+  const handlePrev = () => {
+    carouselRef.current?.prev();
+  };
 
-  // const handleNext = () => {
-  //   carouselRef.current?.next();
-  // };
+  const handleNext = () => {
+    carouselRef.current?.next();
+  };
 
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -54,9 +54,8 @@ const ProductsSection = () => {
         </div>
       ) : (
         <div className="relative">
-          {console.log(halfAllProducts)}
           {halfAllProducts?.length > 0 && (
-            <OwlCarousel
+            <ReactOwlCarousel
               key={halfAllProducts.length}
               ref={carouselRef}
               className="owl-theme"
@@ -148,13 +147,13 @@ const ProductsSection = () => {
                   </div>
                 </Link>
               ))}
-            </OwlCarousel>
+            </ReactOwlCarousel>
           )}
         </div>
       )}
 
       {/* Buttons */}
-      {/* <button
+      <button
         onClick={handlePrev}
         className={`${
           buttonDisplay ? "visible" : "hidden"
@@ -170,7 +169,7 @@ const ProductsSection = () => {
         } absolute top-[45%] right-2 md:right-5 lg:right-10 z-10 p-3 md:p-4 lg:p-5 rounded-full drop-shadow-md bg-white text-black md:text-md lg:text-lg text-sm hover:cursor-pointer transition duration-250 ease-in-out`}
       >
         <FaArrowRight />
-      </button> */}
+      </button>
     </div>
   );
 };

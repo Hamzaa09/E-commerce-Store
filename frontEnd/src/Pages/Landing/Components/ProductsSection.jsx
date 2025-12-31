@@ -63,7 +63,7 @@ const ProductsSection = () => {
           {!halfAllProducts ? (
             <DealsSkeleton />
           ) : (
-            halfAllProducts.map((product) => (
+            halfAllProducts?.map((product) => (
               <Link
                 onClick={handleClick}
                 to={`/singleProduct/${product._id}`}

@@ -5,6 +5,8 @@ import { getBlogThunk } from "../../../../store/blogs/blog.thunk";
 import { Link } from "react-router-dom";
 import BlogSkeleton from "../../../Skeletons/BlogSkeleton";
 import OwlCarousel from "react-owl-carousel";
+import "owl.carousel/dist/assets/owl.carousel.css";
+import "owl.carousel/dist/assets/owl.theme.default.css";
 
 const LatestBlogs = () => {
   const [buttonDisplay, setButtonDisplay] = useState(false);
@@ -52,7 +54,7 @@ const LatestBlogs = () => {
             1000: { items: 3 },
           }}
         >
-          {allblogs?.length  > 0 ? (
+          {allblogs?.length > 0 ? (
             allblogs?.map((blog, index) => (
               <Link
                 key={index}

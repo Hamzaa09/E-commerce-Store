@@ -54,23 +54,7 @@ const ProductsSection = () => {
         </div>
       ) : (
         <div className="relative">
-          {halfAllProducts?.length > 0 && (
-            <OwlCarousel
-              key={halfAllProducts.length}
-              ref={carouselRef}
-              className="owl-theme"
-              loop
-              margin={15}
-              nav={false}
-              dots={false}
-              responsive={{
-                0: { items: 1 },
-                300: { items: 2 },
-                600: { items: 3 },
-                1000: { items: 4 },
-              }}
-            >
-              {halfAllProducts?.map((product) => (
+          {halfAllProducts?.map((product) => (
                 <Link
                   onClick={handleClick}
                   to={`/singleProduct/${product._id}`}
@@ -147,8 +131,6 @@ const ProductsSection = () => {
                   </div>
                 </Link>
               ))}
-            </OwlCarousel>
-          )}
         </div>
       )}
 

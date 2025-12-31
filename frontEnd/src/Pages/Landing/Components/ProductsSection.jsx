@@ -21,13 +21,13 @@ const ProductsSection = () => {
     dispatch(getAllProductsThunk({ prods: true }));
   }, [dispatch]);
 
-  const handlePrev = () => {
-    carouselRef.current?.prev();
-  };
+  // const handlePrev = () => {
+  //   carouselRef.current?.prev();
+  // };
 
-  const handleNext = () => {
-    carouselRef.current?.next();
-  };
+  // const handleNext = () => {
+  //   carouselRef.current?.next();
+  // };
 
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -54,6 +54,7 @@ const ProductsSection = () => {
         </div>
       ) : (
         <div className="relative">
+          {console.log(halfAllProducts)}
           {halfAllProducts?.length > 0 && (
             <OwlCarousel
               key={halfAllProducts.length}

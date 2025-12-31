@@ -56,6 +56,7 @@ const ProductsSection = () => {
         <div className="relative">
           {halfAllProducts?.length > 0 && (
             <OwlCarousel
+              key={halfAllProducts.length}
               ref={carouselRef}
               className="owl-theme"
               loop

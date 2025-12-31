@@ -50,7 +50,7 @@ const PopularProducts = () => {
         </div>
       ) : (
         <div className="relative">
-          {popProducts?.lenth > 0 && (
+          {popProducts?.length > 0 && (
             <OwlCarousel
               ref={carouselRef}
               className="owl-theme"

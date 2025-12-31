@@ -23,8 +23,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { getPaymentThunk } from "../../../store/payment/payment.thunk";
 import ProductsSection from "../Landing/Components/ProductsSection";
 import SingleProductSkeleton from "../../Skeletons/SingleProdSkeleton";
-import ReactOwlCarousel from "react-owl-carousel";
-
+import OwlCarousel from "react-owl-carousel";
 const SingleProductPage = () => {
   const { id } = useParams();
   const [value, setValue] = useState(1);
@@ -123,7 +122,7 @@ const SingleProductPage = () => {
               </div>
 
               <div className="w-[80%] h-fit md:w-full relative mb-3">
-                <ReactOwlCarousel
+             <OwlCarousel
                   key={image} // forces re-render when selection changes
                   ref={carouselRef}
                   className="owl-theme"
@@ -157,7 +156,7 @@ const SingleProductPage = () => {
                       </div>
                     </div>
                   ))}
-                </ReactOwlCarousel>
+                </OwlCarousel>
 
                 {/* buttons */}
                 <button

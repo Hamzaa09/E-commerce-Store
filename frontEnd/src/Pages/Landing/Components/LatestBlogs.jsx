@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBlogThunk } from "../../../../store/blogs/blog.thunk";
 import { Link } from "react-router-dom";
 import BlogSkeleton from "../../../Skeletons/BlogSkeleton";
-import ReactOwlCarousel from "react-owl-carousel";
-("react-owl-carousel");
-import "owl.carousel/dist/assets/owl.carousel.css";
+import OwlCarousel from "react-owl-carousel";import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 
 const LatestBlogs = () => {
@@ -58,7 +56,7 @@ const LatestBlogs = () => {
       ) : (
         <div className="relative">
           {allblogs?.length > 0 && (
-            <ReactOwlCarousel
+         <OwlCarousel
               ref={carouselRef}
               className="owl-theme"
               loop
@@ -101,7 +99,7 @@ const LatestBlogs = () => {
                   </div>
                 </Link>
               ))}
-            </ReactOwlCarousel>
+            </OwlCarousel>
           )}
         </div>
       )}

@@ -102,7 +102,7 @@
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import ReactOwlCarousel from "react-owl-carousel";
+import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 
@@ -156,7 +156,7 @@ const ReactReactOwlCarouselSection = () => {
   return (
     <>
       {/* Brand Logos Carousel */}
-      <ReactOwlCarousel
+   <OwlCarousel
         className="owl-theme mt-10 md:mt-15 px-5 md:px-10 xl:mt-20 xl:px-20"
         {...brandOptions}
       >
@@ -171,7 +171,7 @@ const ReactReactOwlCarouselSection = () => {
             />
           </div>
         ))}
-      </ReactOwlCarousel>
+      </OwlCarousel>
 
       {/* posters */}
       <div className="mx-5 mt-10 md:mt-15 md:mx-10 lg:mt-20 lg:mx-20 tracking-wide overflow-x-scroll lg:overflow-hidden">

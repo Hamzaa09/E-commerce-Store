@@ -30,9 +30,43 @@ import CancelPage from "./Pages/CancelPage";
 import Policies from "./Pages/Footer/Policies";
 import { getUserThunk } from "../store/users/user.thunk";
 import { getAllProductThunk } from "../store/products/product.thunk";
- 
+import "@n8n/chat/style.css";
+import { createChat } from "@n8n/chat";
+import "./index.css";
 
 function App() {
+  useEffect(() => {
+    const handleScroll = () => {
+      const chatWrapper = document.querySelector(".chat-window-wrapper");
+      if (chatWrapper) {
+        if (window.scrollY >= 400) {
+          chatWrapper.classList.add("scrolled");
+        } else {
+          chatWrapper.classList.remove("scrolled");
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    createChat({
+      webhookUrl: import.meta.env.VITE_CHAT_WEBHOOK_URL,
+      initialMessages: ["Hello! How can I assist you today?"],
+      i18n: {
+        en: {
+          title: "Site Assistant",
+          subtitle: "Ask me anything about JogKar!",
+          footer: "",
+          getStarted: "New Conversation",
+          inputPlaceholder: "Type your question..",
+        },
+      },
+    });
+  }, []);
+
   const dispatch = useDispatch();
   const { userProfile } = useSelector((state) => state.userSlice);
 
